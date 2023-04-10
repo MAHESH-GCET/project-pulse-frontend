@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import {store} from '../../store'
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import ProjectUpdates from './ProjectUpdates';
 import ProjectConcens from './ProjectConcerns';
 import TeamComposition from './TeamComposition';
+import { Card } from 'react-bootstrap';
 function ProjectDetails(props) {
     console.log(props)
     let location=useLocation();
@@ -40,7 +40,6 @@ function ProjectDetails(props) {
                         Authorization:`bearer ${token}`
                     }
                 })
-                console.log("pro manager")
                 setConcerns(response.data.payload.project_concerns)
                 setDetails(response.data.payload)
                 setTeam(response.data.payload.team_compositions)
@@ -58,7 +57,6 @@ function ProjectDetails(props) {
                         Authorization:`bearer ${token}`
                     }
                 })
-                console.log("gdo")
                 setConcerns(response.data.payload.project_concerns)
                 setDetails(response.data.payload)
                 setTeam(response.data.payload.team_compositions)
@@ -76,11 +74,10 @@ function ProjectDetails(props) {
                 }
                 
             })
-            console.log("admin")
-                setConcerns(response.data.payload.project_concerns)
-                setDetails(response.data.payload)
-                setTeam(response.data.payload.team_compositions)
-                setUpdates(response.data.projectUpdates)
+            setConcerns(response.data.payload.project_concerns)
+            setDetails(response.data.payload)
+            setTeam(response.data.payload.team_compositions)
+            setUpdates(response.data.projectUpdates)
             } catch(err){
                 console.log(err)
             }
@@ -94,20 +91,71 @@ function ProjectDetails(props) {
 
   return (
     <div>
-        <div className='d-flex justify-content-around' style={{}}>
-        <div>
-            <h2 className='text-success'>Team Count: {team.length}</h2>
+        <div className='d-flex justify-content-around'>
+       <Card style={{width:'13rem'}}>
+        <Card.Body>
+            <Card.Title className='text-center'>Team Size</Card.Title>
+            <Card.Text className='text-center'>{team.length}</Card.Text>
+        </Card.Body>
+       </Card>
+       <Card style={{width:'13rem'}}>
+        {
+            details.project_fitness_indicator==='red' ? (
+            <Card.Body>
+            <Card.Title className='text-center'>Project Fitness</Card.Title>
+            <Card.Text className='text-center'>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+            <circle cx="8" cy="8" r="8"/>
+            </svg>
+            </Card.Text>
+            </Card.Body>
+            ) : details.project_fitness_indicator==='amber' ? (
+                <Card.Body>
+                <Card.Title className='text-center'>Project Fitness</Card.Title>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="yellow" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                <circle cx="8" cy="8" r="8"/>
+                </svg>
+                </Card.Body>
+            ): (
+                <Card.Body>
+                <Card.Title className='text-center'>Project Fitness</Card.Title>
+                <Card.Text className='text-center'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                <circle cx="8" cy="8" r="8"/>
+                </svg>
+                </Card.Text>
+                </Card.Body>
+            )
+        }
+        
+       </Card>
+       <Card style={{width:'13rem'}}>
+       
+            {
+                (concerns.length===0) ? (
+                    <Card.Body className='bg-success'>
+                    <Card.Title className='text-center text-light'>Concern Indicator</Card.Title>
+                    <Card.Text className='text-center text-light' style={{fontSize:'25px'}}>{concerns.length}</Card.Text>
+                    </Card.Body>
+                ) : (concerns.length>0 && concerns.length<5) ? (
+                    <Card.Body className='bg-warning'>
+                    <Card.Title className='text-center text-light'>Concern Indicator</Card.Title>
+                    <Card.Text className='text-center text-light' style={{fontSize:'25px'}}>{concerns.length}</Card.Text>
+                    </Card.Body>
+                ) : (
+                    <Card.Body className='bg-danger'>
+                    <Card.Title className='text-center text-light'>Concern Indicator</Card.Title>
+                    <Card.Text className='text-center text-light' style={{fontSize:'25px'}}>{concerns.length}</Card.Text>
+                    </Card.Body>
+                )
+            }
+            
+        
+       </Card>
         </div>
-        <div>
-            <p className='text-success'>Project Fitness {details.project_fitness_indicator}</p>
-        </div>
-        <div>
-            <h2 className='text-success'>Concerns Indicator {concerns.length}</h2>
-        </div>
-        </div>
-        <div className='row'>
-        <h2 className='text-center'>Project details</h2>
-        <div className='col mx-auto'>
+        <div className='row mt-5'>
+        <h2 className='text-center text-secondary'>PROJECT DETAILS</h2>
+        <div className='col  mx-auto'>
         <table className='text-center table table-striped table-bordered table-hover table-responsive m-2'>
               <thead className='text-center'>
                 <tr className='text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
@@ -122,8 +170,6 @@ function ProjectDetails(props) {
                   <td> domain </td>
                   <td> type_of_project </td>
                   <td>Team Size</td>
-                  <td>GDO Head</td>
-                  <td> project_manager </td>
                 </tr>
               </thead>
               <tbody className='text-center'>
@@ -135,24 +181,38 @@ function ProjectDetails(props) {
                     <td>{details.status}</td>
                     <td>{details.project_start_date}</td>
                     <td>{details.project_end_date}</td>
-                    <td>{details.project_fitness_indicator}</td>
+                    <td>
+                        {
+                            details.project_fitness_indicator==='green' ? (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8"/>
+                                </svg>
+                            ) : (details.project_fitness_indicator==='orange') ? (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="amber" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8"/>
+                                </svg>
+                            ) : (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8"/>
+                                </svg>
+                            )
+                        }
+                    </td>
                     <td>{details.domain}</td>
                     <td>{details.type_of_project}</td>
                     <td>{team.length}</td>
-                    <td>{details.gdo_head}</td>
-                    <td> {details.project_manager}</td>
                 </tr>
               </tbody>
         </table>
         </div>
         </div>
-        <div>
+        <div className='mt-5'>
         <ProjectUpdates projectId={projectId} reqs={reqs} projectUpdates={updates}/>
         </div>  
-        <div>
+        <div className='mt-5'> 
         <ProjectConcens projectId={projectId} reqs={reqs} projectConcerns={concerns}/>
         </div> 
-        <div>
+        <div className='mt-5'>
         <TeamComposition team={team}/>
         </div>
     </div>

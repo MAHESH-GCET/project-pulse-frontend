@@ -58,15 +58,20 @@ function ProjectConcerns(props) {
     }
   return (
     <div>
-        <h2 className='text-success text-center'>Project Concerns</h2>
-        <button className='btn btn-danger float-end me-2 mb-2' onClick={raiseConcern}>Raise Concern</button>
+        <h2 className='text-secondary text-center'>PROJECT CONCERNS</h2>
+        <button 
+        className='float-end btn text-light d-block mb-3 me-4'
+        style={{backgroundColor:'#004c4c'}} 
+        onClick={raiseConcern}
+        >Raise Concern
+        </button>
             {
-                concerns.length>0 ?(
+                concerns!==undefined ?(
                     <div>
                         
-                        <table className='ms-5 me-5 p-5 text-center table table-striped table-bordered table-hover'>
-                            <thead>
-                                <tr>
+                        <table className='text-center table table-striped table-bordered table-hover table-responsive m-2'>
+                            <thead className='text-center'>
+                                <tr className='text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
                                     <td>Project Id</td>
                                     <td>Concern Description</td>
                                     <td>Concern Raised By</td>
@@ -77,7 +82,7 @@ function ProjectConcerns(props) {
                                     <td>Concern Mitigation Date</td>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody className='text-center'>
                                 {
                                     concerns?.map((concernObj,key)=>(
                                         <tr key={key}>

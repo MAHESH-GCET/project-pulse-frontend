@@ -6,14 +6,14 @@ function TeamComposition(props) {
   return (
     <div>
         <div>
-        <h2 className='text-success text-center'>Team Composition</h2>
+        <h2 className='text-secondary text-center'>TEAM COMPOSITION</h2>
             {
-                team.length>0 ?(
+                team!==undefined ?(
                     <div>
                         
-                        <table className=' ms-3 text-center table table-striped table-bordered table-hovered'>
-                            <thead>
-                                <tr className='table text-light' style={{background:'#4EA684'}}>
+                        <table  className='text-center table table-striped table-bordered table-hover table-responsive m-2 mt-4'>
+                            <thead className='text-center'>
+                                <tr className='text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
                                     <td>Id</td>
                                     <td>Project Id</td>
                                     <td>Role</td>
@@ -23,7 +23,7 @@ function TeamComposition(props) {
                                     <td>Exposed To Customer</td>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody className='text-center'>
                                 {
                                     team.map((teamObj,key)=>(
                                         <tr key={key}>

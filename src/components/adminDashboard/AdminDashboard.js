@@ -7,9 +7,6 @@ function AdminDashboard() {
   //projects
   let [projects,setProjects]=useState([]);
   let [resources,setResources]=useState([]);
-  let {employee}=useSelector(state=>state.login)
-
-  
 
   //get token
   let token=sessionStorage.getItem('token');

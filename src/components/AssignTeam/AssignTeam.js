@@ -34,8 +34,8 @@ function AssignTeam(props) {
   },[])
   return (
     <div className='container'>
-        <div className='row justify-content-center mt-5'>
-        <div className='col col-md-6 mx-auto'>
+        <div className='row justify-content-center mt-5 mx-auto'>
+        <div className='col col-md-6'>
         <form
         onSubmit={handleSubmit(assignTeam)}
         className="text-start border p-3 text-light"

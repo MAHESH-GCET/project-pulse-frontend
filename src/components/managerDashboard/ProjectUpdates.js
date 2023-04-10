@@ -29,44 +29,50 @@ function ProjectUpdates(props) {
     };
     //raise update
     const raiseUpdate=()=>{
-        openModel();
-        setValue("project_id",projectId)
+      openModel();
+      setValue("project_id",projectId)
         
     }
     //save update
     const saveUpdate=async()=>{
-        let updateData=getValues();
-        //make req
-        try{
-            let response=await axios.post('http://localhost:4000/manager/project-update',updateData,{
-                headers:{
-                    Authorization:`bearer ${token}`
-                }
-            })
-            console.log(response)
-            if(response.status===200){
-                setUpdateStatus(1)
-                props.reqs();
-                setTimeout(()=>{
-                    closeModel()
-                },1000)
-            }
+      let updateData=getValues();
+      //make req
+      try{
+        let response=await axios.post('http://localhost:4000/manager/project-update',updateData,{
+          headers:{
+            Authorization:`bearer ${token}`
+         }
+        })
+        console.log(response)
+        if(response.status===200){
+          setUpdateStatus(1)
+          props.reqs();
+          setTimeout(()=>{
+            closeModel()
+            },1000)
+          }
         } catch(err){
-            console.log(err)
-        }
+          console.log(err)
+      }
     }
   return (
     <div>
         <div>
-        <h2 className='text-success text-center'>Project Updates</h2>
-        <button className='btn btn-success float-end me-2 mb-2' onClick={raiseUpdate}>Add Update</button>
+        <h2 className='text-secondary text-center '>PROJECT UPDATES</h2>
+        <button className='float-end btn text-light d-block mb-3 me-4'
+        style={{backgroundColor:'#004c4c'}}
+        onClick={raiseUpdate}
+        >
+        Add Update
+        </button>
+        <div  >
             {
                 updates!==undefined ?(
                 <div>
                     
-                    <table className=' ms-5 me-5 p-5 text-center table table-striped table-bordered table-hovered'>
-                    <thead>
-                        <tr>
+                    <table className='text-center table table-striped table-bordered table-hover table-responsive m-2'>
+                    <thead className='text-center'>
+                        <tr className='text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
                             <td> Project Id</td>
                             <td>project Status</td>
                             <td>Date</td>
@@ -76,17 +82,64 @@ function ProjectUpdates(props) {
                             <td>Waiting for Client I/P</td>
                         </tr>
                     </thead>
-                    <tbody>
-                        
+                    <tbody className='text-center'>
                             {
                                 updates.map((updateObj,key)=>(
                                     <tr key={key}>
                                         <td>{updateObj.project_id}</td>
                                         <td>{updateObj.project_status}</td>
                                         <td>{moment(updateObj.date).format('YYYY-MM-DD')}</td>
-                                        <td>{updateObj.schedule_status}</td>
-                                        <td>{updateObj.resourcing_status}</td>
-                                        <td>{updateObj.quality_status}</td>
+                                        <td>
+                                          {
+                                            updateObj.schedule_status==='green' ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <circle cx="8" cy="8" r="8"/>
+                                            </svg>
+                                          ) : (updateObj.schedule_status==='amber') ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <circle cx="8" cy="8" r="8"/>
+                                            </svg>
+                                          ) : (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <circle cx="8" cy="8" r="8"/>
+                                            </svg>
+                                          )
+                                          } 
+                                        </td>
+                                        <td>
+                                          {
+                                            updateObj.resourcing_status==='green' ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <circle cx="8" cy="8" r="8"/>
+                                            </svg>
+                                          ) : (updateObj.resourcing_status==='amber') ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <circle cx="8" cy="8" r="8"/>
+                                            </svg>
+                                          ) : (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <circle cx="8" cy="8" r="8"/>
+                                            </svg>
+                                          )
+                                          } 
+                                        </td>
+                                        <td>
+                                          {
+                                            updateObj.quality_status==='green' ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <circle cx="8" cy="8" r="8"/>
+                                            </svg>
+                                          ) : (updateObj.quality_status==='amber') ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <circle cx="8" cy="8" r="8"/>
+                                            </svg>
+                                          ) : (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <circle cx="8" cy="8" r="8"/>
+                                            </svg>
+                                          )
+                                          } 
+                                        </td>
                                         {
                                             updateObj.waiting_for_client_ip ?(
                                                 <td>Yes</td>
@@ -203,6 +256,7 @@ function ProjectUpdates(props) {
           }
         </div>
       </Modal>
+      </div>
         </div>
     </div>
   )
