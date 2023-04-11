@@ -1,8 +1,12 @@
 import React, { useEffect,useState } from 'react'
 import axios from 'axios'
 import ProjectDetails from './ProjectDetails';
-
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 function ManagerDashboard() {
+  let navigate=useNavigate()
+  let {status}=useSelector(state=>state.login)
+  console.log(status)
   //project Id state
   const [projectId,setProjectId]=useState()
   //get token
@@ -24,12 +28,20 @@ function ManagerDashboard() {
   }
   useEffect(()=>{
     getSpecificProject();
+    if(status==='idle'){
+      navigate('/')
+    }
   },[]);
   return (
     <div>
-    <div>
-      <ProjectDetails projectId={projectId}/>
-    </div>
+      {
+        status==='success' && (
+          <div>
+          <ProjectDetails projectId={projectId}/>
+          </div>
+        ) 
+      }
+    
     
     </div>
 

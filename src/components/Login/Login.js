@@ -40,7 +40,7 @@ import { userLogin } from '../../slices/loginSlice';
           navigate(`/manager/:${employee.employee_id}`)
         }
         else{
-          navigate('/')
+          navigate('/role-error')
         }
       }
     },[status])
@@ -51,7 +51,16 @@ import { userLogin } from '../../slices/loginSlice';
       <div className='row justify-content-center' style={{marginTop:'128px'}}>
         <div className='col col-md-6 mx-auto'>
           <div style={{marginTop:'136px'}}>
-          <h1>PROJECT PULSE</h1>
+          <h1 style={{paddingBottom:'0.7rem'}}>
+            <span style={{
+              fontWeight:'300',
+              wordSpacing:'3px',
+              lineHeight:'2rem',
+              paddingBottom:'0.35rem'
+            }}>
+            PROJECT PULSE
+            </span>
+          </h1>
           </div>
         </div>
         <div className='col col-md-6 mx-auto'>
@@ -93,15 +102,15 @@ import { userLogin } from '../../slices/loginSlice';
             </div>
             <div>
               <button 
-              className="btn btn-dark ms-1 mx-auto"
+              className="btn btn-dark ms-1 mx-auto fs-5"
               >
               Login
               </button>
-              <Link className="fw-semibold text-dark float-end" to='/register'>
-              Register
+              <Link className="fw-semibold text-dark float-end fs-5" to='/register'>
+              register
               </Link>
               <div className='mt-2'>
-              <Link className='fw-semibold text-dark ms-1' to='/forgot-password'>forgot password?</Link>
+              <Link className='fw-semibold text-dark ms-1 fs-5' to='/forgot-password'>forgot password?</Link>
               </div>
               
             </div>

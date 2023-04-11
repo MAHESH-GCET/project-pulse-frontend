@@ -6,6 +6,7 @@ import ProjectUpdates from './ProjectUpdates';
 import ProjectConcens from './ProjectConcerns';
 import TeamComposition from './TeamComposition';
 import { Card } from 'react-bootstrap';
+import moment from 'moment';
 function ProjectDetails(props) {
     console.log(props)
     let location=useLocation();
@@ -74,10 +75,11 @@ function ProjectDetails(props) {
                 }
                 
             })
+            console.log(response.data)
             setConcerns(response.data.payload.project_concerns)
             setDetails(response.data.payload)
             setTeam(response.data.payload.team_compositions)
-            setUpdates(response.data.projectUpdates)
+            setUpdates(response.data.payload.project_updates)
             } catch(err){
                 console.log(err)
             }
@@ -85,6 +87,13 @@ function ProjectDetails(props) {
         }
        }
    }
+   let billedCount=0;
+   let billedCountCheck=team.map(team=>{
+    if(team.billing_status==='billed')
+    billedCount++
+   })
+   console.log(billedCountCheck)
+   console.log(billedCount)
    useEffect(()=>{
     reqs()
    },[projectId])
@@ -95,7 +104,7 @@ function ProjectDetails(props) {
        <Card style={{width:'13rem'}}>
         <Card.Body>
             <Card.Title className='text-center'>Team Size</Card.Title>
-            <Card.Text className='text-center'>{team.length}</Card.Text>
+            <Card.Text className='text-center'>{billedCount}</Card.Text>
         </Card.Body>
        </Card>
        <Card style={{width:'13rem'}}>
@@ -112,9 +121,11 @@ function ProjectDetails(props) {
             ) : details.project_fitness_indicator==='amber' ? (
                 <Card.Body>
                 <Card.Title className='text-center'>Project Fitness</Card.Title>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="yellow" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                <Card.Text className='text-center'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange" class="bi bi-circle-fill" viewBox="0 0 16 16">
                 <circle cx="8" cy="8" r="8"/>
                 </svg>
+                </Card.Text>
                 </Card.Body>
             ): (
                 <Card.Body>
@@ -156,7 +167,7 @@ function ProjectDetails(props) {
         <div className='row mt-5'>
         <h2 className='text-center text-secondary'>PROJECT DETAILS</h2>
         <div className='col  mx-auto'>
-        <table className='text-center table table-striped table-bordered table-hover table-responsive m-2'>
+        <table className='text-center table table-striped bg-light table-bordered table-hover table-responsive m-2'>
               <thead className='text-center'>
                 <tr className='text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
                   <td> Project Id </td>
@@ -179,16 +190,19 @@ function ProjectDetails(props) {
                     <td>{details.client}</td>
                     <td> {details.client_account_manager}</td>
                     <td>{details.status}</td>
-                    <td>{details.project_start_date}</td>
-                    <td>{details.project_end_date}</td>
+                    <td>{moment(details.project_start_date).format('YYYY-MM-DD')}</td>
+                    <td>{
+                        details.project_end_date!==null && <td>{moment(details.project_end_date).format('YYYY-MM-DD')}</td>
+                        }
+                    </td>
                     <td>
                         {
                             details.project_fitness_indicator==='green' ? (
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
                                 <circle cx="8" cy="8" r="8"/>
                                 </svg>
-                            ) : (details.project_fitness_indicator==='orange') ? (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="amber" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                            ) : (details.project_fitness_indicator==='amber') ? (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" class="bi bi-circle-fill" viewBox="0 0 16 16">
                                 <circle cx="8" cy="8" r="8"/>
                                 </svg>
                             ) : (

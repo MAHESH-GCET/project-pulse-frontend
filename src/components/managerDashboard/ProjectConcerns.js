@@ -58,18 +58,24 @@ function ProjectConcerns(props) {
     }
   return (
     <div>
+      <div>
         <h2 className='text-secondary text-center'>PROJECT CONCERNS</h2>
-        <button 
-        className='float-end btn text-light d-block mb-3 me-4'
-        style={{backgroundColor:'#004c4c'}} 
-        onClick={raiseConcern}
-        >Raise Concern
-        </button>
+        {
+          employee.role==='project-manager' && (
+          <button 
+          className='float-end btn text-light d-block mb-3 me-4'
+          style={{backgroundColor:'#004c4c'}} 
+          onClick={raiseConcern}
+          >Raise Concern
+          </button>
+          )
+        }
+        
             {
-                concerns!==undefined ?(
+                concerns!==undefined && concerns.length>0 ?(
                     <div>
                         
-                        <table className='text-center table table-striped table-bordered table-hover table-responsive m-2'>
+                        <table className='text-center table table-striped table-bordered table-hover table-responsive m-2 bg-light'>
                             <thead className='text-center'>
                                 <tr className='text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
                                     <td>Project Id</td>
@@ -106,7 +112,7 @@ function ProjectConcerns(props) {
                         </table>
                     </div>
                 ):(
-                    <p className='text-danger text-center'>No concerns available</p>
+                    <h4 className='text-danger text-center'> No Concerns Available</h4>
                 )
             }
             {/* modal */}
@@ -165,8 +171,8 @@ function ProjectConcerns(props) {
             {/* Severity of concern */}
             <div className="mb-4">
                 <label htmlFor="severity_of_concern">Severity</label>
-                <select name="severity_of_concern" {...register('severity_of_concern',{required:true})} id="role " className="form-control" defaultValue='x'>
-                    <option value='x' disabled>--SELECT--</option>
+                <select name="severity_of_concern" {...register('severity_of_concern',{required:true})} id="role " className="form-control">
+                    <option selected disabled>--SELECT--</option>
                     <option value='high'>High</option>
                     <option value='medium'>Medium</option>
                     <option value='low'>Low</option>
@@ -175,8 +181,8 @@ function ProjectConcerns(props) {
             {/*  status */}
             <div className="mb-4">
                 <label htmlFor="status_of_concern">Status</label>
-                <select name="status_of_concern" {...register('status_of_concern',{required:true})} id="role " className="form-control" defaultValue='x'>
-                    <option value='x' disabled>--RAG Status--</option>
+                <select name="status_of_concern" {...register('status_of_concern',{required:true})} id="role " className="form-control" >
+                    <option selected disabled>--RAG Status--</option>
                     <option value='raised'>Raised</option>
                     <option value='remediation suggested'>Remediation Suggested</option>
                     <option value='mitigated'>Mitigated</option>
@@ -185,8 +191,8 @@ function ProjectConcerns(props) {
             {/* concern raised by cllient */}
             <div className="mb-4">
                 <label htmlFor="concern_raised_by_client">Concern Raised By Client</label>
-                <select name="concern_raised_by_client" {...register('concern_raised_by_client',{required:true})} id="role " className="form-control" defaultValue='x'>
-                    <option value='x' disabled>--SELECT--</option>
+                <select name="concern_raised_by_client" {...register('concern_raised_by_client',{required:true})} id="role " className="form-control" >
+                    <option selected disabled>--SELECT--</option>
                     <option value={1}>Yes</option>
                     <option value={0}>No</option>
                 </select>
@@ -208,8 +214,8 @@ function ProjectConcerns(props) {
             ) 
           }
         </div>
-      </Modal>
-        
+        </Modal>
+        </div>
     </div>
   )
 }

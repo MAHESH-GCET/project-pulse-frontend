@@ -1,5 +1,5 @@
 import React from 'react'
-
+import moment from 'moment'
 function TeamComposition(props) {
     let team=props.team;
     
@@ -8,13 +8,13 @@ function TeamComposition(props) {
         <div>
         <h2 className='text-secondary text-center'>TEAM COMPOSITION</h2>
             {
-                team!==undefined ?(
+                team!==undefined && team.length>0 ?(
                     <div>
                         
-                        <table  className='text-center table table-striped table-bordered table-hover table-responsive m-2 mt-4'>
+                        <table  className='bg-light text-center table table-striped table-bordered table-hover table-responsive m-2 mt-4'>
                             <thead className='text-center'>
                                 <tr className='text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
-                                    <td>Id</td>
+                                    <td>Id in Team</td>
                                     <td>Project Id</td>
                                     <td>Role</td>
                                     <td>Status</td>
@@ -31,7 +31,7 @@ function TeamComposition(props) {
                                             <td>{teamObj.project_id}</td>
                                             <td>{teamObj.role_in_project}</td>
                                             <td>{teamObj.status}</td>
-                                            <td>{teamObj.start_date}</td>
+                                            <td>{moment(teamObj.start_date).format('YYYY-MM-DD')}</td>
                                             <td>{teamObj.billing_status}</td>
                                             {
                                                 teamObj.exposed_to_customer ?(
@@ -49,7 +49,7 @@ function TeamComposition(props) {
                     </div>
 
                 ) :(
-                    <p> No Team allocated </p>
+                    <h4 className='text-center text-danger'> No Team allocated </h4>
                 )
             }
         </div>

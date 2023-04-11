@@ -5,7 +5,10 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import axios from 'axios';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
 function ProjectUpdates(props) {
+    let {employee}=useSelector(state=>state.login)
+    console.log(employee)
     // get id from props
     let projectId=props.projectId;
     let updates=props.projectUpdates;
@@ -55,22 +58,26 @@ function ProjectUpdates(props) {
           console.log(err)
       }
     }
+    console.log(updates)
   return (
     <div>
         <div>
         <h2 className='text-secondary text-center '>PROJECT UPDATES</h2>
-        <button className='float-end btn text-light d-block mb-3 me-4'
-        style={{backgroundColor:'#004c4c'}}
-        onClick={raiseUpdate}
-        >
-        Add Update
-        </button>
+        {
+          employee.role==='project-manager' && (
+            <button className='float-end btn text-light d-block mb-3 me-4'
+            style={{backgroundColor:'#004c4c'}}
+            onClick={raiseUpdate}
+            >
+            Add Update </button>
+          )
+        }
         <div  >
             {
-                updates!==undefined ?(
+                (updates!==undefined && updates.length>0) ?(
                 <div>
                     
-                    <table className='text-center table table-striped table-bordered table-hover table-responsive m-2'>
+                    <table className='text-center table table-striped table-bordered table-hover table-responsive m-2 bg-light'>
                     <thead className='text-center'>
                         <tr className='text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
                             <td> Project Id</td>
@@ -155,7 +162,7 @@ function ProjectUpdates(props) {
                     </table>
                 </div>
                 ) :(
-                    <p className='text-danger text-center'> No Updates Available </p>
+                    <h4 className='text-danger text-center'> No Updates Available </h4>
                 )
             }
             {/* modal */}
@@ -193,11 +200,16 @@ function ProjectUpdates(props) {
               <label htmlFor="project_status" className="mb-1">
               Project Status
               </label>
-              <input
-                type="text"
-                className="form-control"
-                {...register("project_status", { required: true })}
-              />
+              <select className='form-control' {...register('project_status',{required:true})}>
+            <option>--select--</option>
+            <option value='sales'>Sales</option>
+            <option value='pre-sales'>Pre-Sales</option>
+            <option value='client sign-off'>Client Sign Off</option>
+            <option value='in-progress'>In-Progress</option>
+            <option value='completed'>Completed</option>
+            <option value='paused'>Paused</option>
+            <option value='deferred'>Deferred</option>
+            </select>
             </div>
             {/* schedule status */}
             <div className="mb-4">

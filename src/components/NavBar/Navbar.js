@@ -10,7 +10,7 @@ function Navbar() {
   // if logout is clicked, remove token
   const handleLogout=()=>{
     //clear token
-    sessionStorage.removeItem("token")
+    sessionStorage.clear()
     //dispatch
     dispatch(clearState());
   }

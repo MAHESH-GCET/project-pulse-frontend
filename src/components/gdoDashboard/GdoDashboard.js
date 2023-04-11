@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AssignTeam from '../AssignTeam/AssignTeam';
 import { useForm } from "react-hook-form";
+import moment from 'moment';
+import { Accordion } from 'react-bootstrap';
 function GdoDashboard() {
 
   let navigate=useNavigate();
@@ -32,7 +34,8 @@ function GdoDashboard() {
   let {
     register,
     setValue,
-    getValues
+    getValues,
+    reset
   } = useForm();
 
   //modal state
@@ -67,6 +70,11 @@ function GdoDashboard() {
       console.log(response)
       if(response.status===201){
         setReqRaised(1);
+        setTimeout(()=>{
+          reset();
+          closeModel();
+          setReqRaised(0)
+        },2000)
       }
     } catch(err){
       console.log(err)
@@ -80,10 +88,13 @@ function GdoDashboard() {
 
   return (
     <div>
-    <div className='row'>
-    <h2 className='text-center'>Project details</h2>
-      {
-        projects.length!==undefined ? (
+      <Accordion className='mt-5' defaultActiveKey='0'>
+        <Accordion.Item eventKey='0'>
+          <Accordion.Header><h2 className='ms-5'>Project Details</h2></Accordion.Header>
+          <Accordion.Body>
+          <div className='row'>
+          {
+          projects.length!==undefined ? (
           <div className='col mx-auto'>
             <table className='text-center table table-striped table-bordered table-hover table-responsive m-2'>
               <thead className='text-center'>
@@ -140,7 +151,7 @@ function GdoDashboard() {
                         state:{
                           projectId:project.project_id
                         }
-                      })}>{project.project_start_date}</td>
+                      })}>{moment(project.project_start_date).format('YYYY-MM-DD')}</td>
                       <td
                       onClick={()=>navigate(`/project-details`,{
                         state:{
@@ -152,7 +163,21 @@ function GdoDashboard() {
                         state:{
                           projectId:project.project_id
                         }
-                      })}>{project.project_fitness_indicator}</td>
+                      })}>{
+                        project.project_fitness_indicator==='green' ? (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8"/>
+                                </svg>
+                            ) : (project.project_fitness_indicator==='amber') ? (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8"/>
+                                </svg>
+                            ) : (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8"/>
+                                </svg>
+                            )
+                      }</td>
                       <td 
                       onClick={()=>navigate(`/project-details`,{
                         state:{
@@ -181,13 +206,13 @@ function GdoDashboard() {
             </table>
           </div>
         ) :(
-          <p>No Projects to show</p>
+          <h4 className='text-danger text-center'>No Projects to show</h4>
         )
       }
-      </div>
-      {/* Resource Request */}
-      {/* modal */}
-      <Modal show={showModal} onHide={closeModel} backdrop={"static"} className='bg-light'>
+          </div>
+          {/* Resource Request */}
+          {/* modal */}
+          <Modal show={showModal} onHide={closeModel} backdrop={"static"} className='bg-light'>
         <Modal.Header closeButton>
           <Modal.Title>Resource Request</Modal.Title>
         </Modal.Header>
@@ -233,11 +258,18 @@ function GdoDashboard() {
             )
           }
         </div>
-      </Modal>
-      <div>
-        <AssignTeam projects={projects}/>
-      </div>
-    
+          </Modal>
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey='1'>
+          <Accordion.Header><h2 className='ms-5'>Assign Team</h2></Accordion.Header>
+          <Accordion.Body>
+          <div>
+          <AssignTeam projects={projects}/>
+          </div>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
     </div>
   )
 }

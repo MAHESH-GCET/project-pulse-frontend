@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment'
+import { Accordion } from 'react-bootstrap';
 function AdminDashboard() {
   let navigate=useNavigate();
   //projects
@@ -46,10 +48,12 @@ function AdminDashboard() {
   
   return (
     <div>
-      <div >
-      <div >
+      <Accordion className='mt-5' defaultActiveKey='0'>
+        <Accordion.Item eventKey='0'>
+          <Accordion.Header> <h2 className='ms-5'>Project Details</h2></Accordion.Header>
+          <Accordion.Body>
+          <div >
         {/* Project Details */}
-      <h2 className='text-center'>Project details</h2>
       <button 
       className='float-end btn text-light d-block mb-3'
       style={{backgroundColor:'#004c4c'}}
@@ -73,8 +77,10 @@ function AdminDashboard() {
                   <td> domain </td>
                   <td> type_of_project </td>
                   <td> project_manager </td>
-                  <td>Edit</td>
-                  <td>Delete</td>
+                  { /* <td>Edit</td>
+                  <td>Delete</td> */
+                  }
+                 
                 </tr>
               </thead>
               <tbody className='text-center'>
@@ -116,7 +122,7 @@ function AdminDashboard() {
                         state:{
                           projectId:project.project_id
                         }
-                      })}>{project.project_start_date}</td>
+                      })}>{moment(project.project_start_date).format('YYYY-MM-DD')}</td>
                       <td 
                       onClick={()=>navigate(`/project-details`,{
                         state:{
@@ -128,7 +134,21 @@ function AdminDashboard() {
                         state:{
                           projectId:project.project_id
                         }
-                      })}>{project.project_fitness_indicator}</td>
+                      })}>{
+                        project.project_fitness_indicator==='green' ? (
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                          <circle cx="8" cy="8" r="8"/>
+                          </svg>
+                      ) : (project.project_fitness_indicator==='amber') ? (
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                          <circle cx="8" cy="8" r="8"/>
+                          </svg>
+                      ) : (
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                          <circle cx="8" cy="8" r="8"/>
+                          </svg>
+                      )
+                      }</td>
                       <td
                       onClick={()=>navigate(`/project-details`,{
                         state:{
@@ -147,8 +167,9 @@ function AdminDashboard() {
                           projectId:project.project_id
                         }
                       })}>{project.project_manager}</td>
-                      <td><button className='btn btn-outline-warning'>Edit</button></td>
-                      <td><button className='btn btn-outline-danger'>Delete</button></td>
+                      
+                      {/*<td><button className='btn btn-outline-warning'>Edit</button></td>
+                      <td><button className='btn btn-outline-danger'>Delete</button></td>*/}
                     </tr>
                   ))
                 }
@@ -160,10 +181,14 @@ function AdminDashboard() {
         )
         
       }
-      </div>
-      {/* get resourcing requests */}
-      <div>
-        <h2 className='text-center mt-5'>Resource Requests</h2>
+          </div>
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey='1'>
+          <Accordion.Header><h2 className='ms-5'>Resource Requests</h2></Accordion.Header>
+          <Accordion.Body>
+          {/* get resourcing requests */}
+          <div>
         <table className='text-center table table-striped table-bordered table-hover w-50 mx-auto mt-3'>
           <thead className='table '>
             <tr  className='table text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
@@ -184,8 +209,11 @@ function AdminDashboard() {
             }
           </tbody>
         </table>
-      </div>  
-      </div>
+          </div>  
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+      
     </div>
   )
 }

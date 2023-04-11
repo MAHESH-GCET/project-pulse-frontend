@@ -13,6 +13,7 @@ import ManagerDashboard from './components/managerDashboard/ManagerDashboard';
 import ForgotPassword from './components/forgot-password/ForgotPassword';
 import ProjectDetails from './components/managerDashboard/ProjectDetails';
 import AddProject from './components/adminDashboard/AddProject';
+import RoleErrorPage from './components/RoleErrorPage';
 function App() {
 
   //get user obj 
@@ -59,6 +60,10 @@ function App() {
         {
           path:'project-details',
           element:<ProjectDetails/>
+        },
+        {
+          path:'/role-error',
+          element:<RoleErrorPage/>
         }
       ]
     }

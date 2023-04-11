@@ -6,13 +6,37 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 function AddProject() {
     //form to add projects
-  let {register,handleSubmit,formState: { errors }}=useForm();
+  let {register,handleSubmit,formState: { errors },reset}=useForm();
   let [project,setProject]=useState(0)
   let [message,setMessage]=useState("")
+  let [employeeList,setEmployeeList]=useState([])
   let {employee}=useSelector(state=>state.login)
   let navigate=useNavigate()
     //get token
   let token=sessionStorage.getItem('token');
+  
+  //get all employees
+  const getEmployees=async()=>{
+    try{
+      let response=await axios.get('http://localhost:4000/admin/employees',{
+        headers:{
+          Authorization:`bearer ${token}`
+        }
+      })
+      setEmployeeList(response.data.payload)
+    } catch(err){
+      console.log(err)
+    }
+  }
+
+  // filter gdo from employee list
+  let gdoList=employeeList.filter(employeeObj=>employeeObj.role==='gdo')
+  console.log(gdoList)
+
+  //filter project-manager from employee list
+  let managerList=employeeList.filter(employeeObj=>employeeObj.role==='project-manager')
+  console.log(managerList)
+  
   //add new project
   const addNewProject=async(projectObj)=>{
     try{
@@ -29,11 +53,15 @@ function AddProject() {
             navigate(`/admin/${employee.employee_id}`)
         },3000)
       }
+      else if(response.status===200 && response.data.errMsg==='Validation error'){
+        setMessage('Manager is already assigned to project')
+      }
     } catch(err){
       console.log(err)
     }
   }
  useEffect(()=>{
+    getEmployees()
     addNewProject()
  },[setProject])
   return (
@@ -97,12 +125,16 @@ function AddProject() {
             <label htmlFor='status' className="mb-1 ms-1 fw-semibold ">
               Project Status
             </label>
-            <input
-            type='text'
-            className='form-control p-1'
-            placeholder='Status of project'
-            {...register("status",{required:true})} 
-            />
+            <select className='form-control' {...register('status',{required:true})}>
+            <option selected disabled>--select--</option>
+            <option value='sales'>Sales</option>
+            <option value='pre-sales'>Pre-Sales</option>
+            <option value='client sign-off'>Client Sign Off</option>
+            <option value='in-progress'>In-Progress</option>
+            <option value='completed'>Completed</option>
+            <option value='paused'>Paused</option>
+            <option value='deferred'>Deferred</option>
+            </select>
             {errors.status?.type === "required" && (
                 <p className="text-danger">Enter Title</p>
             )}
@@ -127,12 +159,12 @@ function AddProject() {
             <label htmlFor='project_fitness_indicator' className="mb-1 ms-1 fw-semibold ">
               Project Fitness
             </label>
-            <input
-            type='text'
-            className='form-control p-1'
-            placeholder='Project Fitness'
-            {...register("project_fitness_indicator",{required:true})} 
-            />
+            <select className='form-control' {...register('project_fitness_indicator',{required:true})}>
+            <option selected disabled>--select--</option>
+            <option value='red'>Red</option>
+            <option value='amber'>Amber</option>
+            <option value='green'>Green</option>
+            </select>
             {errors.project_fitness_indicator?.type === "required" && (
                 <p className="text-danger">Enter Title</p>
             )}
@@ -157,12 +189,17 @@ function AddProject() {
             <label htmlFor='type_of_project' className="mb-1 ms-1 fw-semibold ">
               Type
             </label>
-            <input
-            type='text'
-            className='form-control p-1'
-            placeholder='Project Type'
-            {...register("type_of_project",{required:true})} 
-            />
+            <select className='form-control' {...register('type_of_project',{required:true})}>
+            <option selected disabled>--select--</option>
+            <option value='development'>Development</option>
+            <option value='devops'>DevOps</option>
+            <option value='test-automation'>Test Automation</option>
+            <option value='performance testing'>Performance Testing</option>
+            <option value='security'>Security</option>
+            <option value='sustenance engineering'>Sustaenance Engineering</option>
+            <option value='mobility'>Mobility</option>
+            <option value='storage'>Storage</option>
+            </select>
             {errors.type_of_project?.type === "required" && (
                 <p className="text-danger">Enter Title</p>
             )}
@@ -172,12 +209,18 @@ function AddProject() {
             <label htmlFor='gdo_head' className="mb-1 ms-1 fw-semibold ">
               GDO Head
             </label>
-            <input
-            type='number'
-            className='form-control p-1'
-            placeholder='Enter GDO Id'
-            {...register("gdo_head",{required:true})} 
-            />
+            <select className='form-control' {...register('gdo_head',{required:true})}>
+            <option value="">
+            --select--
+            </option>
+            {
+                gdoList.map((gdo,key)=>(
+                    <option key={key} value={gdo.employee_id}>
+                        {gdo.employee_id} - {gdo.employee_name}
+                    </option>
+                ))
+            }
+            </select>
             {errors.gdo_head?.type === "required" && (
                 <p className="text-danger">Enter Title</p>
             )}
@@ -187,31 +230,38 @@ function AddProject() {
             <label htmlFor='project_manager' className="mb-1 ms-1 fw-semibold ">
               Project Manager
             </label>
-            <input
-            type='number'
-            className='form-control p-1'
-            placeholder='Enter Manager Id'
-            {...register("project_manager",{required:true})} 
-            />
+            <select className='form-control' {...register('project_manager',{required:true})}>
+            <option selected disabled>
+            --select--
+            </option>
+            {
+                managerList.map((manager,key)=>(
+                    <option key={key} value={manager.employee_id}>
+                        {manager.employee_id} - {manager.employee_name}
+                    </option>
+                ))
+            }
+            </select>
             {errors.project_manager?.type === "required" && (
                 <p className="text-danger">Enter Title</p>
             )}
           </div>
           <div className='text-center'>
           <button className='btn btn-dark'>Add</button>
+          
           </div>
           
             {
                 project===1 ? (
-                    <p className='text-center text-dark'>Project Added</p>
+                    <p className='text-center text-danger'>Project Added</p>
                 ) : (
                     <p className='text-center text-danger'>{message}</p>
                 )
             }
-          
-        </form>
+          </form>
         </div>
         </div>
+        
     </div>
   )
 }

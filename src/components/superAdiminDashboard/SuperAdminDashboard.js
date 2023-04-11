@@ -86,7 +86,7 @@ function SuperAdminDashboard() {
   return (
     <div>
       <div>
-      <h2 className='text-center mb-4'>Employee Details</h2>
+      <h2 className='text-center text-secondary mb-4'>Employee Details</h2>
       {
         employees.length>0 && (
           <div>
@@ -193,8 +193,8 @@ function SuperAdminDashboard() {
             {/* role */}
             <div className="mb-4">
                 <label htmlFor="role">Role</label>
-                <select name="role" {...register('role',{required:true})} id="role " className="form-control" defaultValue='x'>
-                    <option value='x' disabled>--Assign-Role--</option>
+                <select name="role" {...register('role',{required:true})} id="role " className="form-control" >
+                    <option selected disabled>--Assign-Role--</option>
                     <option value='admin'>Admin</option>
                     <option value='gdo'>GDO</option>
                     <option value='project-manager'>Project Manager</option>
