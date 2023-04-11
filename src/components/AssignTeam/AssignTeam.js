@@ -5,7 +5,7 @@ function AssignTeam(props) {
   // get projects from props
   let projects=props.projects
   let [teamAssigned,setTeamAssigned]=useState(0)
-  console.log(projects)
+
   //form to assign team
   let {register,handleSubmit,formState: { errors }}=useForm();
   //token
@@ -18,10 +18,10 @@ function AssignTeam(props) {
                 Authorization: `bearer ${token}`
             }
         })
-        console.log(response)
+       
         if(response.status===201){
             setTeamAssigned(1)
-            console.log(teamAssigned)
+            
         }
     } catch(err){
         console.log(err)

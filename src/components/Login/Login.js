@@ -16,14 +16,12 @@ import { userLogin } from '../../slices/loginSlice';
     } = useForm();
     // submit login details to userslice
     const onSubmit=(userCred)=>{
-        console.log(userCred);
         dispatch(userLogin(userCred));
         reset();
     }
 
     //get user state
     const {employee,errorMessage,status}=useSelector(state=>state.login)
-    console.log(employee);
     //navigate if login success
     useEffect(()=>{
       if(status==="success"){

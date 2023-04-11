@@ -8,7 +8,6 @@ import TeamComposition from './TeamComposition';
 import { Card } from 'react-bootstrap';
 import moment from 'moment';
 function ProjectDetails(props) {
-    console.log(props)
     let location=useLocation();
     let {employee}=useSelector(state=>state.login)
     let projectId=props.projectId
@@ -28,7 +27,6 @@ function ProjectDetails(props) {
     let [updates,setUpdates]=useState([])
     let [team,setTeam]=useState([])
     let [details,setDetails]=useState({})
-    console.log(employee)
     
    //make reqs
    const reqs=async()=>{
@@ -75,7 +73,6 @@ function ProjectDetails(props) {
                 }
                 
             })
-            console.log(response.data)
             setConcerns(response.data.payload.project_concerns)
             setDetails(response.data.payload)
             setTeam(response.data.payload.team_compositions)
@@ -92,8 +89,7 @@ function ProjectDetails(props) {
     if(team.billing_status==='billed')
     billedCount++
    })
-   console.log(billedCountCheck)
-   console.log(billedCount)
+
    useEffect(()=>{
     reqs()
    },[projectId])
@@ -113,7 +109,7 @@ function ProjectDetails(props) {
             <Card.Body>
             <Card.Title className='text-center'>Project Fitness</Card.Title>
             <Card.Text className='text-center'>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" className="bi bi-circle-fill" viewBox="0 0 16 16">
             <circle cx="8" cy="8" r="8"/>
             </svg>
             </Card.Text>
@@ -122,7 +118,7 @@ function ProjectDetails(props) {
                 <Card.Body>
                 <Card.Title className='text-center'>Project Fitness</Card.Title>
                 <Card.Text className='text-center'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange" className="bi bi-circle-fill" viewBox="0 0 16 16">
                 <circle cx="8" cy="8" r="8"/>
                 </svg>
                 </Card.Text>
@@ -131,7 +127,7 @@ function ProjectDetails(props) {
                 <Card.Body>
                 <Card.Title className='text-center'>Project Fitness</Card.Title>
                 <Card.Text className='text-center'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green" className="bi bi-circle-fill" viewBox="0 0 16 16">
                 <circle cx="8" cy="8" r="8"/>
                 </svg>
                 </Card.Text>
@@ -191,22 +187,21 @@ function ProjectDetails(props) {
                     <td> {details.client_account_manager}</td>
                     <td>{details.status}</td>
                     <td>{moment(details.project_start_date).format('YYYY-MM-DD')}</td>
-                    <td>{
+                    {
                         details.project_end_date!==null && <td>{moment(details.project_end_date).format('YYYY-MM-DD')}</td>
-                        }
-                    </td>
+                    }
                     <td>
                         {
                             details.project_fitness_indicator==='green' ? (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                 <circle cx="8" cy="8" r="8"/>
                                 </svg>
                             ) : (details.project_fitness_indicator==='amber') ? (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                 <circle cx="8" cy="8" r="8"/>
                                 </svg>
                             ) : (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                 <circle cx="8" cy="8" r="8"/>
                                 </svg>
                             )

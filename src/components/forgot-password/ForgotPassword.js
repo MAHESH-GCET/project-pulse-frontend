@@ -21,7 +21,6 @@ function ForgotPassword() {
         setEmail(userObj.email)
         try{
             let response=await axios.post('http://localhost:4000/forgot-password',userObj)
-            console.log(response)
             if(response.status===200){
                 setOtpStatus(true)
                 
@@ -34,7 +33,6 @@ function ForgotPassword() {
     const onOtpSubmit=async(userCred)=>{
         try{
         let response=await axios.put(`http://localhost:4000/reset-password/${userCred.email}`,userCred);
-        console.log(response)
         if(response.status===200){
             setNewPassword("password reset successsful")
             setTimeout(()=>{
@@ -55,7 +53,16 @@ function ForgotPassword() {
         <div  className='row justify-content-center' style={{marginTop:'128px'}} >
         <div className='col col-md-6 mx-auto'>
           <div style={{marginTop:'178px'}}>
-          <h1 >RESET PASSWORD</h1>
+          <h1 style={{paddingBottom:'0.7rem'}}>
+            <span style={{
+              fontWeight:'300',
+              wordSpacing:'3px',
+              lineHeight:'2rem',
+              paddingBottom:'0.35rem'
+            }}>
+            PROJECT PULSE
+            </span>
+          </h1>
           </div>
         </div>
         <div className='col col-md-6 mx-auto'>

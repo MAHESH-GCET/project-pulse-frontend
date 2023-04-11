@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 function TeamComposition(props) {
-    let team=props.team;
+let team=props.team;
     
   return (
     <div>

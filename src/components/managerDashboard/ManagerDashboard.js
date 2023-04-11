@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function ManagerDashboard() {
   let navigate=useNavigate()
   let {status}=useSelector(state=>state.login)
-  console.log(status)
+
   //project Id state
   const [projectId,setProjectId]=useState()
   //get token
@@ -20,7 +20,6 @@ function ManagerDashboard() {
         }
       })
       let projectId=response.data.payload[0].project_id
-      console.log(projectId)
       setProjectId(projectId)
     } catch(err){
       console.log(err)

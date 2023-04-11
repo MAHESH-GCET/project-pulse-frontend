@@ -50,7 +50,6 @@ function GdoDashboard() {
   let [reqRaised,setReqRaised]=useState(0);
   //raise resource req
   const raiseResourceReq=(projectId)=>{
-    console.log(projectId)
     openModel();
 
     //set values
@@ -67,7 +66,6 @@ function GdoDashboard() {
       headers:{
         Authorization:`bearer ${token}`
       }})
-      console.log(response)
       if(response.status===201){
         setReqRaised(1);
         setTimeout(()=>{
@@ -94,7 +92,7 @@ function GdoDashboard() {
           <Accordion.Body>
           <div className='row'>
           {
-          projects.length!==undefined ? (
+        projects.length!==undefined ? (
           <div className='col mx-auto'>
             <table className='text-center table table-striped table-bordered table-hover table-responsive m-2'>
               <thead className='text-center'>
@@ -165,15 +163,15 @@ function GdoDashboard() {
                         }
                       })}>{
                         project.project_fitness_indicator==='green' ? (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                 <circle cx="8" cy="8" r="8"/>
                                 </svg>
                             ) : (project.project_fitness_indicator==='amber') ? (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                 <circle cx="8" cy="8" r="8"/>
                                 </svg>
                             ) : (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                 <circle cx="8" cy="8" r="8"/>
                                 </svg>
                             )

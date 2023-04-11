@@ -40,7 +40,6 @@ function AdminDashboard() {
       console.log(err)
     }
   }
-  console.log(resources)
   useEffect(()=>{
     getProjects();
     getResourcingReq();
@@ -136,15 +135,15 @@ function AdminDashboard() {
                         }
                       })}>{
                         project.project_fitness_indicator==='green' ? (
-                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" className="bi bi-circle-fill" viewBox="0 0 16 16">
                           <circle cx="8" cy="8" r="8"/>
                           </svg>
                       ) : (project.project_fitness_indicator==='amber') ? (
-                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" className="bi bi-circle-fill" viewBox="0 0 16 16">
                           <circle cx="8" cy="8" r="8"/>
                           </svg>
                       ) : (
-                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" className="bi bi-circle-fill" viewBox="0 0 16 16">
                           <circle cx="8" cy="8" r="8"/>
                           </svg>
                       )

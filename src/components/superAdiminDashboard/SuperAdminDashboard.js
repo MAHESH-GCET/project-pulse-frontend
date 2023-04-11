@@ -10,7 +10,7 @@ function SuperAdminDashboard() {
   let [errorMessage,setErrorMessage]=useState("");
   let [modifiedUser,setModifiedUser]=useState(employees);
   let {employee} =useSelector(state=>state.login)
-  console.log(employee)
+ 
   //get token
   let token=sessionStorage.getItem('token');
   //for modal form
@@ -31,7 +31,7 @@ function SuperAdminDashboard() {
 
   //edit user
   const editUser=(key)=>{
-    console.log(employees[key])
+    
     openModel();
     //set values
     setValue("employee_id",employees[key].employee_id);
@@ -55,7 +55,7 @@ function SuperAdminDashboard() {
       }
     })
     setModifiedUser(res.data.payload);
-    console.log(res);
+   
     } catch(err){
       console.log(err);
       setErrorMessage(err.message)
@@ -72,7 +72,7 @@ function SuperAdminDashboard() {
         }
       })
       setEmployees(response.data.employees)
-      console.log(employees)
+      
     } catch(err){
       console.log(err)
       setErrorMessage(err.message)
@@ -194,7 +194,7 @@ function SuperAdminDashboard() {
             <div className="mb-4">
                 <label htmlFor="role">Role</label>
                 <select name="role" {...register('role',{required:true})} id="role " className="form-control" >
-                    <option selected disabled>--Assign-Role--</option>
+                    <option defaultValue  disabled>--Assign-Role--</option>
                     <option value='admin'>Admin</option>
                     <option value='gdo'>GDO</option>
                     <option value='project-manager'>Project Manager</option>

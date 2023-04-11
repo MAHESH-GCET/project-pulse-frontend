@@ -44,7 +44,6 @@ function ProjectConcerns(props) {
                     Authorization:`bearer ${token}`
                 }
             })
-            console.log(response)
             if(response.status===201){
                 setConcernRaised(1)
                 props.reqs();
@@ -172,7 +171,7 @@ function ProjectConcerns(props) {
             <div className="mb-4">
                 <label htmlFor="severity_of_concern">Severity</label>
                 <select name="severity_of_concern" {...register('severity_of_concern',{required:true})} id="role " className="form-control">
-                    <option selected disabled>--SELECT--</option>
+                    <option defaultValue disabled>--SELECT--</option>
                     <option value='high'>High</option>
                     <option value='medium'>Medium</option>
                     <option value='low'>Low</option>

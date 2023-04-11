@@ -5,7 +5,6 @@ export const userLogin=createAsyncThunk('/login',async(userCred,{rejectWithValue
     //get token,empObj from backend
     try{
         let response=await axios.post("http://localhost:4000/employee-login",userCred)
-        console.log(response)
         if(response.data.message==='success'){
         //store token in session storage
         sessionStorage.setItem('token',response.data.token)
@@ -52,7 +51,6 @@ export const loginSlice=createSlice({
             state.status="pending"
         });
         builder.addCase(userLogin.fulfilled,(state,action)=>{
-            console.log("fulfilled",action)
             state.employee=action.payload.employee;
             state.errorMessage="";
             state.status="success";

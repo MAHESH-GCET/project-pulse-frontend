@@ -8,7 +8,6 @@ import moment from 'moment';
 import { useSelector } from 'react-redux';
 function ProjectUpdates(props) {
     let {employee}=useSelector(state=>state.login)
-    console.log(employee)
     // get id from props
     let projectId=props.projectId;
     let updates=props.projectUpdates;
@@ -46,7 +45,7 @@ function ProjectUpdates(props) {
             Authorization:`bearer ${token}`
          }
         })
-        console.log(response)
+    
         if(response.status===200){
           setUpdateStatus(1)
           props.reqs();
@@ -58,7 +57,7 @@ function ProjectUpdates(props) {
           console.log(err)
       }
     }
-    console.log(updates)
+
   return (
     <div>
         <div>
@@ -99,15 +98,15 @@ function ProjectUpdates(props) {
                                         <td>
                                           {
                                             updateObj.schedule_status==='green' ? (
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                             <circle cx="8" cy="8" r="8"/>
                                             </svg>
                                           ) : (updateObj.schedule_status==='amber') ? (
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                             <circle cx="8" cy="8" r="8"/>
                                             </svg>
                                           ) : (
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                             <circle cx="8" cy="8" r="8"/>
                                             </svg>
                                           )
@@ -116,15 +115,15 @@ function ProjectUpdates(props) {
                                         <td>
                                           {
                                             updateObj.resourcing_status==='green' ? (
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                             <circle cx="8" cy="8" r="8"/>
                                             </svg>
                                           ) : (updateObj.resourcing_status==='amber') ? (
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                             <circle cx="8" cy="8" r="8"/>
                                             </svg>
                                           ) : (
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                             <circle cx="8" cy="8" r="8"/>
                                             </svg>
                                           )
@@ -133,15 +132,15 @@ function ProjectUpdates(props) {
                                         <td>
                                           {
                                             updateObj.quality_status==='green' ? (
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="green" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                             <circle cx="8" cy="8" r="8"/>
                                             </svg>
                                           ) : (updateObj.quality_status==='amber') ? (
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="orange" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                             <circle cx="8" cy="8" r="8"/>
                                             </svg>
                                           ) : (
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                             <circle cx="8" cy="8" r="8"/>
                                             </svg>
                                           )

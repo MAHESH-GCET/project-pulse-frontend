@@ -22,7 +22,7 @@ function Register() {
     try {
       // save the user details in json server
       let response = await axios.post("http://localhost:4000/employee-registration", userObj);
-      console.log(response);
+     
       if (response.status === 201) {
         //set err state with empty
         setErr("");
@@ -40,7 +40,16 @@ function Register() {
       <div className="row justify-content-center" style={{marginTop:'50px'}}>
       <div className='col col-md-6 mx-auto'>
           <div style={{marginTop:'220px'}}>
-          <h1>REGISTER</h1>
+          <h1 style={{paddingBottom:'0.7rem'}}>
+            <span style={{
+              fontWeight:'300',
+              wordSpacing:'3px',
+              lineHeight:'2rem',
+              paddingBottom:'0.35rem'
+            }}>
+            PROJECT PULSE
+            </span>
+          </h1>
           </div>
       </div>
         <div className="col col-md-6  mx-auto">

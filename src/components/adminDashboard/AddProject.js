@@ -31,11 +31,9 @@ function AddProject() {
 
   // filter gdo from employee list
   let gdoList=employeeList.filter(employeeObj=>employeeObj.role==='gdo')
-  console.log(gdoList)
 
   //filter project-manager from employee list
   let managerList=employeeList.filter(employeeObj=>employeeObj.role==='project-manager')
-  console.log(managerList)
   
   //add new project
   const addNewProject=async(projectObj)=>{
@@ -45,7 +43,6 @@ function AddProject() {
           Authorization:`bearer ${token}`
         }
       })
-      console.log(response)
       if(response.status===201){
         setProject(1);
         setMessage("Project created")
