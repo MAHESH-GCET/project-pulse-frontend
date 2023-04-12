@@ -71,6 +71,7 @@ function ForgotPassword() {
             className="text-start border p-3 text-light"
             style={{ borderRadius: "20px",backgroundColor:'	#008080',width:'500px'}}
             >
+            <h1 className="text-center text-light mb-3">Reset Password</h1>
             {/* Email */}
             <div className="mb-3">
               <label htmlFor="email" className="mb-1 ms-1 fw-semibold " style={{fontSize:'20px'}}>
@@ -88,7 +89,7 @@ function ForgotPassword() {
             </div>
             <div className='text-center'>
             <button 
-              className="btn btn-dark ms-1 mx-auto"
+              className="btn btn-dark ms-1 mx-auto fs-5"
               >
               Get OTP
               </button>
@@ -133,7 +134,7 @@ function ForgotPassword() {
                         )}    
                     </div> 
                     <div className='text-center'>
-                    <button className='btn btn-dark ms-1 mx-auto'> Change Password</button>
+                    <button className='btn btn-dark ms-1 mx-auto fs-5'> Change Password</button>
                     </div>
                     {newPassword && (
                         <p className='text-success text-center'>{newPassword} ... redirecting to login page</p>

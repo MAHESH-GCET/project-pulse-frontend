@@ -1,6 +1,6 @@
 import { set, useForm } from "react-hook-form";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function Register() {
@@ -139,9 +139,12 @@ function Register() {
               )}
             </div>
             <div>
-              <button className="btn btn-dark ms-1 mx-auto " style={{textAlign:'center'}}>
+              <button className="btn btn-dark ms-1 mx-auto fs-5 " style={{textAlign:'center'}}>
               Register
               </button>
+              <Link className="fw-semibold text-dark float-end fs-5" to='/'>
+              Go back to Login?
+              </Link>
             </div>
           </form>
         </div>

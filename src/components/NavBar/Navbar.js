@@ -3,7 +3,9 @@ import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { clearState } from "../../slices/loginSlice";
+import { useNavigate } from 'react-router-dom';
 function Navbar() {
+  let navigate=useNavigate()
   //get status from login
   const {employee,status}=useSelector(state=>state.login)
   let dispatch=useDispatch();
@@ -27,14 +29,17 @@ function Navbar() {
       
         <ul className="nav justify-content-end">
         {status==="success" && (
-            <>
+            <div className='d-flex'>
             <h5 className='mt-3'>Hi, {employee.employee_name}</h5>
+            <NavLink className='nav-link' onClick={()=>navigate(-1)} >
+            <button className='btn text-light' style={{backgroundColor:'#004c4c'}} >Dashboard</button>
+            </NavLink>
             <li className="nav-item">
             <NavLink className="nav-link" to="/" onClick={handleLogout}>
               <button className='btn text-light' style={{backgroundColor:'#004c4c'}}>Logout</button>
             </NavLink>
             </li>
-            </>
+            </div>
           )
         }
         </ul>

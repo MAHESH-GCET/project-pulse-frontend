@@ -105,10 +105,12 @@ import { userLogin } from '../../slices/loginSlice';
               Login
               </button>
               <Link className="fw-semibold text-dark float-end fs-5" to='/register'>
-              register
+              New User?
               </Link>
               <div className='mt-2'>
-              <Link className='fw-semibold text-dark ms-1 fs-5' to='/forgot-password'>forgot password?</Link>
+              <Link className='fw-semibold text-dark ms-1 fs-5' to='/forgot-password'>
+              Forgot Password?
+              </Link>
               </div>
               
             </div>

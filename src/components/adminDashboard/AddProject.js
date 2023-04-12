@@ -68,7 +68,7 @@ function AddProject() {
         <div className='col col-md-6 mx-auto'>
         <form
           onSubmit={handleSubmit(addNewProject)}
-          className="text-start border p-3 text-light"
+          className="text-start border p-3 text-light w-100 mb-5"
           style={{ borderRadius: "20px",backgroundColor:'#004c4c',width:'500px'}}
         >
           <h2 className='text-center text-light mb-3'>Add Project</h2>
@@ -79,7 +79,7 @@ function AddProject() {
             </label>
             <input
             type='text'
-            className='form-control p-1'
+            className='form-control p-2'
             placeholder='Enter Project Title'
             {...register("project_name",{required:true})} 
             />
@@ -94,7 +94,7 @@ function AddProject() {
             </label>
             <input
             type='text'
-            className='form-control p-1'
+            className='form-control p-2'
             placeholder='Enter Client Name'
             {...register("client",{required:true})} 
             />
@@ -109,7 +109,7 @@ function AddProject() {
             </label>
             <input
             type='number'
-            className='form-control p-1'
+            className='form-control p-2'
             placeholder='Enter Client Account Manager Id'
             {...register("client_account_manager",{required:true})} 
             />
@@ -122,7 +122,7 @@ function AddProject() {
             <label htmlFor='status' className="mb-1 ms-1 fw-semibold ">
               Project Status
             </label>
-            <select className='form-control' {...register('status',{required:true})}>
+            <select className='form-control p-2' {...register('status',{required:true})}>
             <option selected disabled>--select--</option>
             <option value='sales'>Sales</option>
             <option value='pre-sales'>Pre-Sales</option>
@@ -143,7 +143,7 @@ function AddProject() {
             </label>
             <input
             type='date'
-            className='form-control p-1'
+            className='form-control p-2'
             placeholder='Start Date'
             {...register("project_start_date",{required:true})} 
             />
@@ -156,7 +156,7 @@ function AddProject() {
             <label htmlFor='project_fitness_indicator' className="mb-1 ms-1 fw-semibold ">
               Project Fitness
             </label>
-            <select className='form-control' {...register('project_fitness_indicator',{required:true})}>
+            <select className='form-control p-2' {...register('project_fitness_indicator',{required:true})}>
             <option selected disabled>--select--</option>
             <option value='red'>Red</option>
             <option value='amber'>Amber</option>
@@ -173,7 +173,7 @@ function AddProject() {
             </label>
             <input
             type='text'
-            className='form-control p-1'
+            className='form-control p-2'
             placeholder='Project Domain'
             {...register("domain",{required:true})} 
             />
@@ -186,7 +186,7 @@ function AddProject() {
             <label htmlFor='type_of_project' className="mb-1 ms-1 fw-semibold ">
               Type
             </label>
-            <select className='form-control' {...register('type_of_project',{required:true})}>
+            <select className='form-control p-2' {...register('type_of_project',{required:true})}>
             <option selected disabled>--select--</option>
             <option value='development'>Development</option>
             <option value='devops'>DevOps</option>
@@ -206,7 +206,7 @@ function AddProject() {
             <label htmlFor='gdo_head' className="mb-1 ms-1 fw-semibold ">
               GDO Head
             </label>
-            <select className='form-control' {...register('gdo_head',{required:true})}>
+            <select className='form-control p-2' {...register('gdo_head',{required:true})}>
             <option value="">
             --select--
             </option>
@@ -227,7 +227,7 @@ function AddProject() {
             <label htmlFor='project_manager' className="mb-1 ms-1 fw-semibold ">
               Project Manager
             </label>
-            <select className='form-control' {...register('project_manager',{required:true})}>
+            <select className='form-control p-2' {...register('project_manager',{required:true})}>
             <option selected disabled>
             --select--
             </option>

@@ -187,9 +187,11 @@ function ProjectDetails(props) {
                     <td> {details.client_account_manager}</td>
                     <td>{details.status}</td>
                     <td>{moment(details.project_start_date).format('YYYY-MM-DD')}</td>
+                    <td>
                     {
                         details.project_end_date!==null && <td>{moment(details.project_end_date).format('YYYY-MM-DD')}</td>
                     }
+                    </td>
                     <td>
                         {
                             details.project_fitness_indicator==='green' ? (
