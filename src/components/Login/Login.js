@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form';
 import {Link, useNavigate} from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
 import { userLogin } from '../../slices/loginSlice';
-
+import './login.css';
 
   function Login() {
     let dispatch=useDispatch();
@@ -47,14 +47,15 @@ import { userLogin } from '../../slices/loginSlice';
     <div className="container">
       
       <div className='row justify-content-center' style={{marginTop:'128px'}}>
-        <div className='col col-md-6 mx-auto'>
+        <div className='col col-md-6 mx-auto fw-bold '>
           <div style={{marginTop:'136px'}}>
           <h1 style={{paddingBottom:'0.7rem'}}>
-            <span style={{
-              fontWeight:'300',
+            <span className='title' style={{
               wordSpacing:'3px',
               lineHeight:'2rem',
-              paddingBottom:'0.35rem'
+              paddingBottom:'0.35rem',
+              color: '#4ea684',
+              fontSize: "60px",
             }}>
             PROJECT PULSE
             </span>
@@ -64,7 +65,7 @@ import { userLogin } from '../../slices/loginSlice';
         <div className='col col-md-6 mx-auto'>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="text-start border p-3 text-light"
+            className="text-start  p-3 text-light bg-dark "
             style={{ borderRadius: "20px",backgroundColor:'	#008080',width:'500px'}}
           >
             <h1 className="text-center text-light  mb-3">Login</h1>
@@ -100,15 +101,15 @@ import { userLogin } from '../../slices/loginSlice';
             </div>
             <div>
               <button 
-              className="btn btn-dark ms-1 mx-auto fs-5"
+              className="btn btn-light ms-1 mx-auto fs-5"
               >
               Login
               </button>
-              <Link className="fw-semibold text-dark float-end fs-5" to='/register'>
+              <Link className="fw-semibold text-light float-end fs-5" to='/register'>
               New User?
               </Link>
               <div className='mt-2'>
-              <Link className='fw-semibold text-dark ms-1 fs-5' to='/forgot-password'>
+              <Link className='fw-semibold text-light ms-1 fs-5' to='/forgot-password'>
               Forgot Password?
               </Link>
               </div>

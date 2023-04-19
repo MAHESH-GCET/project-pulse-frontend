@@ -1,18 +1,27 @@
 import React from 'react'
 import moment from 'moment'
+import { Accordion } from 'react-bootstrap';
+import AccordionItem from 'react-bootstrap/esm/AccordionItem';
+import AccordionBody from 'react-bootstrap/esm/AccordionBody';
+import AccordionHeader from 'react-bootstrap/esm/AccordionHeader';
 function TeamComposition(props) {
 let team=props.team;
     
   return (
     <div>
         <div>
-        <h2 className='text-secondary text-center'>TEAM COMPOSITION</h2>
+        
             {
                 team!==undefined && team.length>0 ?(
                     <div>
-                        
-                        <table  className='bg-light text-center table table-striped table-bordered table-hover table-responsive m-2 mt-4'>
-                            <thead className='text-center'>
+                        <Accordion defaultActiveKey='0'>
+                            <AccordionItem eventKey='0' style={{backgroundColor:'transparent'}}>
+                               <AccordionHeader>
+                               <h2 className='text-dark  fw-bold text-center ms-5'>TEAM COMPOSITION</h2>
+                               </AccordionHeader>
+                                <AccordionBody>
+                                <table  className='bg-light text-center table table-striped table-bordered table-hover table-responsive m-2 mt-4'>
+                                <thead className='text-center'>
                                 <tr className='text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
                                     <td>Id in Team</td>
                                     <td>Project Id</td>
@@ -22,8 +31,8 @@ let team=props.team;
                                     <td>Billing Status</td>
                                     <td>Exposed To Customer</td>
                                 </tr>
-                            </thead>
-                            <tbody className='text-center'>
+                                </thead>
+                                <tbody className='text-center'>
                                 {
                                     team.map((teamObj,key)=>(
                                         <tr key={key}>
@@ -44,8 +53,12 @@ let team=props.team;
                                         </tr>
                                     ))
                                 }
-                            </tbody>
-                        </table>
+                                </tbody>
+                                </table>
+                                </AccordionBody>
+                            </AccordionItem>
+                        </Accordion>
+                        
                     </div>
 
                 ) :(

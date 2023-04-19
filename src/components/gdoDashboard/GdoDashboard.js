@@ -8,8 +8,9 @@ import AssignTeam from '../AssignTeam/AssignTeam';
 import { useForm } from "react-hook-form";
 import moment from 'moment';
 import { Accordion } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 function GdoDashboard() {
-
+  let {status}=useSelector(state=>state.login)
   let navigate=useNavigate();
   // projects local state
   let [projects,setProjects]=useState([]);
@@ -86,8 +87,10 @@ function GdoDashboard() {
 
   return (
     <div>
-      <Accordion className='mt-5' defaultActiveKey='0'>
-        <Accordion.Item eventKey='0'>
+      {
+        status==='success' ? (
+          <Accordion className='mt-5' defaultActiveKey='0'>
+        <Accordion.Item style={{backgroundColor:'transparent'}} eventKey='0'>
           <Accordion.Header><h2 className='ms-5'>Project Details</h2></Accordion.Header>
           <Accordion.Body>
           <div className='row'>
@@ -111,7 +114,7 @@ function GdoDashboard() {
                   <td>Raise Resource Request</td>
                 </tr>
               </thead>
-              <tbody className='text-center'>
+              <tbody className='text-center bg-light'>
                 {
                   projects.map((project,key)=>(
                     <tr key={key} style={{fontSize:'18px'}}>
@@ -259,7 +262,7 @@ function GdoDashboard() {
           </Modal>
           </Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey='1'>
+        <Accordion.Item style={{backgroundColor:'transparent'}} eventKey='1'>
           <Accordion.Header><h2 className='ms-5'>Assign Team</h2></Accordion.Header>
           <Accordion.Body>
           <div>
@@ -267,7 +270,12 @@ function GdoDashboard() {
           </div>
           </Accordion.Body>
         </Accordion.Item>
-      </Accordion>
+        </Accordion>
+        ) : (
+          navigate('/')
+        )
+      }
+      
     </div>
   )
 }

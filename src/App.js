@@ -46,7 +46,7 @@ function App() {
           element:<AdminDashboard/>
         },
         {
-          path:'admin/add-project',
+          path:'/admin/add-project',
           element:<AddProject/>
         },
         {
@@ -58,7 +58,7 @@ function App() {
           element:<ManagerDashboard/>
         },
         {
-          path:'project-details',
+          path:'/project-details',
           element:<ProjectDetails/>
         },
         {

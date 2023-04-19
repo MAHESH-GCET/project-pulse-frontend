@@ -9,7 +9,7 @@ function AdminDashboard() {
   //projects
   let [projects,setProjects]=useState([]);
   let [resources,setResources]=useState([]);
-
+  let {status}=useSelector(state=>state.login)
   //get token
   let token=sessionStorage.getItem('token');
  
@@ -48,8 +48,10 @@ function AdminDashboard() {
   
   return (
     <div>
-      <Accordion className='mt-5' defaultActiveKey='0'>
-        <Accordion.Item eventKey='0'>
+      {
+        status==='success' ? (
+          <Accordion className='mt-5' defaultActiveKey='0'>
+          <Accordion.Item style={{backgroundColor:'transparent'}} eventKey='0'>
           <Accordion.Header> <h2 className='ms-5'>Project Details</h2></Accordion.Header>
           <Accordion.Body>
           <div >
@@ -83,7 +85,7 @@ function AdminDashboard() {
                  
                 </tr>
               </thead>
-              <tbody className='text-center'>
+              <tbody className='text-center bg-light'>
                 {
                   projects.map((project,key)=>(
                     <tr key={key} style={{fontSize:'18px'}}>
@@ -184,21 +186,21 @@ function AdminDashboard() {
           </div>
           </Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey='1'>
+        <Accordion.Item style={{backgroundColor:'transparent'}} eventKey='1'>
           <Accordion.Header><h2 className='ms-5'>Resource Requests</h2></Accordion.Header>
           <Accordion.Body>
           {/* get resourcing requests */}
           <div>
-        <table className='text-center table table-striped table-bordered table-hover w-50 mx-auto mt-3'>
-          <thead className='table '>
-            <tr  className='table text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
+          <table className='text-center table table-striped table-bordered table-hover table-responsive w-50 mx-auto mt-3'>
+          <thead className='text-center '>
+            <tr  className='text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
               <td>Project Id</td>
               <td>Resource Description</td>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='bg-light'>
             {
-              resources.length>0 && (
+              resources!==undefined && resources.length>0 && (
                 resources.map((resourceObj,key)=>(
                   <tr key={key} style={{fontSize:'18px'}}>
                     <td>{resourceObj.project_id}</td>
@@ -212,7 +214,11 @@ function AdminDashboard() {
           </div>  
           </Accordion.Body>
         </Accordion.Item>
-      </Accordion>
+          </Accordion>
+        ) : (
+          navigate('/')
+        )
+      }
       
     </div>
   )

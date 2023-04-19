@@ -4,12 +4,13 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 function SuperAdminDashboard() {
+  let navigate=useNavigate();
   //state
   let [employees,setEmployees]=useState([]);
-  let [errorMessage,setErrorMessage]=useState("");
   let [modifiedUser,setModifiedUser]=useState(employees);
-  let {employee} =useSelector(state=>state.login)
+  let {status} =useSelector(state=>state.login)
  
   //get token
   let token=sessionStorage.getItem('token');
@@ -58,7 +59,6 @@ function SuperAdminDashboard() {
    
     } catch(err){
       console.log(err);
-      setErrorMessage(err.message)
     }
     
   }
@@ -75,7 +75,6 @@ function SuperAdminDashboard() {
       
     } catch(err){
       console.log(err)
-      setErrorMessage(err.message)
     }
   }
 
@@ -85,12 +84,14 @@ function SuperAdminDashboard() {
 
   return (
     <div>
+      {
+      status==='success' ? (
       <div>
-      <h2 className='text-center text-secondary mb-4'>Employee Details</h2>
+      <h2 className='text-center mb-4'>Employee Details</h2>
       {
         employees.length>0 && (
           <div>
-            <table className='table table-bordered w-75 mx-auto table-striped'>
+            <table className='table table-bordered w-75 mx-auto table-striped '>
               <thead className='text-center'>
                 <tr className='text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
                   <td>Employeee Id</td>
@@ -102,7 +103,7 @@ function SuperAdminDashboard() {
                 </tr>
               </thead>
 
-              <tbody className='text-center'>
+              <tbody className='text-center table-light'>
                 {
                   employees.map((employee,key)=>(
                     <tr key={key} style={{fontSize:'18px'}}>
@@ -193,8 +194,8 @@ function SuperAdminDashboard() {
             {/* role */}
             <div className="mb-4">
                 <label htmlFor="role">Role</label>
-                <select name="role" {...register('role',{required:true})} id="role " className="form-control" >
-                    <option defaultValue  disabled>--Assign-Role--</option>
+                <select name="role" {...register('role',{required:true})} id="role" className="form-control" defaultValue={'x'} >
+                    <option value={'x'} disabled>--Assign-Role--</option>
                     <option value='admin'>Admin</option>
                     <option value='gdo'>GDO</option>
                     <option value='project-manager'>Project Manager</option>
@@ -211,8 +212,13 @@ function SuperAdminDashboard() {
             Save
           </Button>
         </Modal.Footer>
-      </Modal>
-      </div>
+        </Modal>
+        </div>
+        ) : (
+          navigate('/')
+        )
+      }
+      
     </div>
   )
 }

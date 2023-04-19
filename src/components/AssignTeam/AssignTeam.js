@@ -7,7 +7,7 @@ function AssignTeam(props) {
   let [teamAssigned,setTeamAssigned]=useState(0)
 
   //form to assign team
-  let {register,handleSubmit,formState: { errors }}=useForm();
+  let {register,handleSubmit,formState: { errors },reset}=useForm();
   //token
   let token = sessionStorage.getItem('token')
   //assign team
@@ -21,6 +21,7 @@ function AssignTeam(props) {
        
         if(response.status===201){
             setTeamAssigned(1)
+            reset()
             
         }
     } catch(err){
@@ -38,20 +39,21 @@ function AssignTeam(props) {
         <div className='col col-md-6'>
         <form
         onSubmit={handleSubmit(assignTeam)}
-        className="text-start border p-3 text-light"
+        className="text-start border p-3 text-light w-100 bg-dark"
         style={{ borderRadius: "20px",backgroundColor:'#004c4c',width:'500px'}}
         >
         <h2 className='text-center text-light mb-3'>Assign Team</h2>
         {/* project id */}
-        <div>
+        <div className='mb-2'>
             <label htmlFor='project_id' className="mb-1 ms-1 fw-semibold ">
                 Select Project
             </label>
             <select
-            className='form-control'
+            className='form-control p-2'
             {...register('project_id',{required:true})}
+            defaultValue={'x'}
             >
-            <option selected disabled>
+            <option value={'x'} disabled>
             --select--
             </option>
             {
@@ -68,8 +70,8 @@ function AssignTeam(props) {
             <label htmlFor='role_in_project' className="mb-1 ms-1 fw-semibold ">
                 Role
             </label>
-            <select className='form-control' {...register('role_in_project',{required:true})}>
-            <option selected disabled>--select--</option>
+            <select className='form-control p-2' {...register('role_in_project',{required:true})} defaultValue={'x'}>
+            <option value={'x'} disabled>--select--</option>
             <option value='QA'>QA</option>
             <option value='dev'>Dev</option>
             <option value='management'>Management</option>
@@ -88,7 +90,7 @@ function AssignTeam(props) {
             </label>
             <input
                 type='date'
-                className='form-control'
+                className='form-control p-2'
                 placeholder='date of joining project'
                 {...register('start_date',{required:true})}
             />
@@ -102,8 +104,8 @@ function AssignTeam(props) {
             <label htmlFor='status' className="mb-1 ms-1 fw-semibold ">
                 Status
             </label>
-            <select className='form-control' {...register('status',{required:true})}>
-            <option selected disabled>--select--</option>
+            <select className='form-control p-2' {...register('status',{required:true})} defaultValue={'x'}>
+            <option value={'x'} disabled>--select--</option>
             <option value='active'>Active</option>
             <option value='in-active'>In-Active</option>
             </select>
@@ -113,8 +115,8 @@ function AssignTeam(props) {
             <label htmlFor='billing_status' className="mb-1 ms-1 fw-semibold ">
                 Billing Status
             </label>
-            <select className='form-control' {...register('billing_status',{required:true})}>
-            <option selected disabled>--select--</option>
+            <select className='form-control p-2' {...register('billing_status',{required:true})} defaultValue={'x'}>
+            <option value={'x'} disabled>--select--</option>
             <option value='billed'>Billed</option>
             <option value='buffered'>Buffered</option>
             </select>
@@ -124,8 +126,8 @@ function AssignTeam(props) {
             <label htmlFor='exposed_to_customer' className="mb-1 ms-1 fw-semibold ">
                 Exposed to Customer
             </label>
-            <select className='form-control' {...register('exposed_to_customer',{required:true})}>
-            <option selected disabled>--select--</option>
+            <select className='form-control p-2' {...register('exposed_to_customer',{required:true})} defaultValue={'x'}>
+            <option value={'x'} disabled>--select--</option>
             <option value={1}>Yes</option>
             <option value={0}>No</option>
             </select>
@@ -135,14 +137,14 @@ function AssignTeam(props) {
             <label htmlFor='allocation_type' className="mb-1 ms-1 fw-semibold ">
                 Allocation Type
             </label>
-            <select className='form-control' {...register('allocation_type',{required:true})}>
-            <option selected disabled>--select--</option>
+            <select className='form-control p-2' {...register('allocation_type',{required:true})} defaultValue={'x'}>
+            <option value={'x'} disabled>--select--</option>
             <option value='temporary'>Temporary</option>
             <option value='permanent'>Permanent</option>
             </select>
         </div>
         <div className='text-center'>
-            <button className='btn btn-dark'>Create</button>
+            <button className='btn btn-light'>Create</button>
         </div>
         <div>
         {

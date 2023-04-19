@@ -2,7 +2,7 @@ import { set, useForm } from "react-hook-form";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-
+import './register.css'
 function Register() {
   //state
   let [err, setErr] = useState("");
@@ -22,11 +22,14 @@ function Register() {
     try {
       // save the user details in json server
       let response = await axios.post("http://localhost:4000/employee-registration", userObj);
-     
+     console.log(response)
       if (response.status === 201) {
         //set err state with empty
         setErr("");
         navigate('/');
+      }
+      else if(response.data.errMsg){
+        setErr('WAL Access Denied')
       }
     } catch (err) {
       console.log(err);
@@ -41,11 +44,12 @@ function Register() {
       <div className='col col-md-6 mx-auto'>
           <div style={{marginTop:'220px'}}>
           <h1 style={{paddingBottom:'0.7rem'}}>
-            <span style={{
-              fontWeight:'300',
+          <span className='title' style={{
               wordSpacing:'3px',
               lineHeight:'2rem',
-              paddingBottom:'0.35rem'
+              paddingBottom:'0.35rem',
+              color: '#4ea684',
+              fontSize: "60px",
             }}>
             PROJECT PULSE
             </span>
@@ -53,10 +57,10 @@ function Register() {
           </div>
       </div>
         <div className="col col-md-6  mx-auto">
-          {err && <p className="text-danger fs-3">{err}</p>}
+          
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="text-start border p-3 text-light"
+            className="text-start border p-3 text-light bg-dark"
             style={{ borderRadius: "20px",backgroundColor:'	#008080',width:'500px'}}
           >
             <h1 className="text-center text-light mb-3">Register</h1>
@@ -128,7 +132,7 @@ function Register() {
                 Password
               </label>
               <input
-                type="text"
+                type="password"
                 className="form-control p-3"
                 placeholder="Enter password"
                 {...register("password", { required: true })}
@@ -138,11 +142,12 @@ function Register() {
                 <p className="text-danger">Enter password</p>
               )}
             </div>
+            {err && <p className="text-danger text-center fw-semibold fs-3">{err}</p>}
             <div>
-              <button className="btn btn-dark ms-1 mx-auto fs-5 " style={{textAlign:'center'}}>
+              <button className="btn btn-light ms-1 mx-auto fs-5 " style={{textAlign:'center'}}>
               Register
               </button>
-              <Link className="fw-semibold text-dark float-end fs-5" to='/'>
+              <Link className="fw-semibold text-light float-end fs-5" to='/'>
               Go back to Login?
               </Link>
             </div>

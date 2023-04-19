@@ -34,11 +34,13 @@ function ManagerDashboard() {
   return (
     <div>
       {
-        status==='success' && (
+        status==='success' ? (
           <div>
           <ProjectDetails projectId={projectId}/>
           </div>
-        ) 
+        ) : (
+          navigate('/')
+        )
       }
     
     

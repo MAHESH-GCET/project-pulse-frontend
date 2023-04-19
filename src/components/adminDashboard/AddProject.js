@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 function AddProject() {
     //form to add projects
-  let {register,handleSubmit,formState: { errors },reset}=useForm();
+  let {register,handleSubmit,formState: { errors }}=useForm();
   let [project,setProject]=useState(0)
   let [message,setMessage]=useState("")
   let [employeeList,setEmployeeList]=useState([])
@@ -68,7 +68,7 @@ function AddProject() {
         <div className='col col-md-6 mx-auto'>
         <form
           onSubmit={handleSubmit(addNewProject)}
-          className="text-start border p-3 text-light w-100 mb-5"
+          className="text-start border p-3 text-light w-100 mb-5 bg-dark"
           style={{ borderRadius: "20px",backgroundColor:'#004c4c',width:'500px'}}
         >
           <h2 className='text-center text-light mb-3'>Add Project</h2>
@@ -122,8 +122,8 @@ function AddProject() {
             <label htmlFor='status' className="mb-1 ms-1 fw-semibold ">
               Project Status
             </label>
-            <select className='form-control p-2' {...register('status',{required:true})}>
-            <option selected disabled>--select--</option>
+            <select className='form-control p-2' {...register('status',{required:true})} defaultValue='x'>
+            <option value='x' disabled>--select--</option>
             <option value='sales'>Sales</option>
             <option value='pre-sales'>Pre-Sales</option>
             <option value='client sign-off'>Client Sign Off</option>
@@ -156,8 +156,8 @@ function AddProject() {
             <label htmlFor='project_fitness_indicator' className="mb-1 ms-1 fw-semibold ">
               Project Fitness
             </label>
-            <select className='form-control p-2' {...register('project_fitness_indicator',{required:true})}>
-            <option selected disabled>--select--</option>
+            <select className='form-control p-2' {...register('project_fitness_indicator',{required:true})} defaultValue={'x'}>
+            <option value={'x'} disabled>--select--</option>
             <option value='red'>Red</option>
             <option value='amber'>Amber</option>
             <option value='green'>Green</option>
@@ -186,8 +186,8 @@ function AddProject() {
             <label htmlFor='type_of_project' className="mb-1 ms-1 fw-semibold ">
               Type
             </label>
-            <select className='form-control p-2' {...register('type_of_project',{required:true})}>
-            <option selected disabled>--select--</option>
+            <select className='form-control p-2' {...register('type_of_project',{required:true})} defaultValue={'x'}>
+            <option value={'x'} disabled>--select--</option>
             <option value='development'>Development</option>
             <option value='devops'>DevOps</option>
             <option value='test-automation'>Test Automation</option>
@@ -206,8 +206,8 @@ function AddProject() {
             <label htmlFor='gdo_head' className="mb-1 ms-1 fw-semibold ">
               GDO Head
             </label>
-            <select className='form-control p-2' {...register('gdo_head',{required:true})}>
-            <option value="">
+            <select className='form-control p-2' {...register('gdo_head',{required:true})} defaultValue={'x'}>
+            <option value={'x'}>
             --select--
             </option>
             {
@@ -227,8 +227,8 @@ function AddProject() {
             <label htmlFor='project_manager' className="mb-1 ms-1 fw-semibold ">
               Project Manager
             </label>
-            <select className='form-control p-2' {...register('project_manager',{required:true})}>
-            <option selected disabled>
+            <select className='form-control p-2' {...register('project_manager',{required:true})} defaultValue={'x'}> 
+            <option value={'x'} disabled>
             --select--
             </option>
             {
@@ -244,7 +244,7 @@ function AddProject() {
             )}
           </div>
           <div className='text-center'>
-          <button className='btn btn-dark'>Add</button>
+          <button className='btn btn-light'>Add</button>
           
           </div>
           

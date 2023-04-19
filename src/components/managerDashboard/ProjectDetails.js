@@ -11,10 +11,12 @@ function ProjectDetails(props) {
     let location=useLocation();
     let {employee}=useSelector(state=>state.login)
     let projectId=props.projectId
-
+    
     //get data from props
     if(employee.role!=='project-manager'){
-        projectId=location.state.projectId;
+        if(location.state!==null){
+            projectId=location.state.projectId;
+        }
     }
     //get token
     let token=sessionStorage.getItem('token')
@@ -85,7 +87,7 @@ function ProjectDetails(props) {
        }
    }
    let billedCount=0;
-   let billedCountCheck=team.map(team=>{
+   team.map(team=>{
     if(team.billing_status==='billed')
     billedCount++
    })
@@ -100,7 +102,7 @@ function ProjectDetails(props) {
        <Card style={{width:'13rem'}}>
         <Card.Body>
             <Card.Title className='text-center'>Team Size</Card.Title>
-            <Card.Text className='text-center'>{billedCount}</Card.Text>
+            <Card.Text className='text-center' style={{fontSize:'25px'}}>{billedCount}</Card.Text>
         </Card.Body>
        </Card>
        <Card style={{width:'13rem'}}>
@@ -161,21 +163,21 @@ function ProjectDetails(props) {
        </Card>
         </div>
         <div className='row mt-5'>
-        <h2 className='text-center text-secondary'>PROJECT DETAILS</h2>
+        <h2 className='text-center fw-bold text-dark'>PROJECT DETAILS</h2>
         <div className='col  mx-auto'>
         <table className='text-center table table-striped bg-light table-bordered table-hover table-responsive m-2'>
               <thead className='text-center'>
                 <tr className='text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
                   <td> Project Id </td>
                   <td> Project Name </td>
-                  <td> client </td>
-                  <td> client account manager </td>
-                  <td> status </td>
-                  <td> project_start_date </td>
-                  <td> project_end_date </td>
-                  <td> project_fitness_indicator </td>
-                  <td> domain </td>
-                  <td> type_of_project </td>
+                  <td> Client </td>
+                  <td> Client Account Manager </td>
+                  <td> Status </td>
+                  <td> Project Start Date </td>
+                  <td> Project End Date </td>
+                  <td> Project Fitness Indicator </td>
+                  <td> Domain </td>
+                  <td> Type Of Project </td>
                   <td>Team Size</td>
                 </tr>
               </thead>
@@ -189,7 +191,7 @@ function ProjectDetails(props) {
                     <td>{moment(details.project_start_date).format('YYYY-MM-DD')}</td>
                     <td>
                     {
-                        details.project_end_date!==null && <td>{moment(details.project_end_date).format('YYYY-MM-DD')}</td>
+                        details.project_end_date!==null && <p>{moment(details.project_end_date).format('YYYY-MM-DD')}</p>
                     }
                     </td>
                     <td>

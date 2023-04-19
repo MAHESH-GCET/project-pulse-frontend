@@ -6,6 +6,11 @@ import Modal from "react-bootstrap/Modal";
 import axios from 'axios';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
+import { Accordion } from 'react-bootstrap';
+import AccordionItem from 'react-bootstrap/esm/AccordionItem';
+import AccordionHeader from 'react-bootstrap/esm/AccordionHeader';
+import AccordionBody from 'react-bootstrap/esm/AccordionBody';
+
 function ProjectUpdates(props) {
     let {employee}=useSelector(state=>state.login)
     // get id from props
@@ -18,7 +23,8 @@ function ProjectUpdates(props) {
     let {
         register,
         setValue,
-        getValues
+        getValues,
+        reset
     } = useForm();
     
     //modal state
@@ -38,6 +44,7 @@ function ProjectUpdates(props) {
     //save update
     const saveUpdate=async()=>{
       let updateData=getValues();
+      updateData.date=new Date().toJSON().slice(0,10);
       //make req
       try{
         let response=await axios.post('http://localhost:4000/manager/project-update',updateData,{
@@ -50,7 +57,9 @@ function ProjectUpdates(props) {
           setUpdateStatus(1)
           props.reqs();
           setTimeout(()=>{
+            reset()
             closeModel()
+            setUpdateStatus(0)
             },1000)
           }
         } catch(err){
@@ -61,23 +70,28 @@ function ProjectUpdates(props) {
   return (
     <div>
         <div>
-        <h2 className='text-secondary text-center '>PROJECT UPDATES</h2>
-        {
-          employee.role==='project-manager' && (
-            <button className='float-end btn text-light d-block mb-3 me-4'
-            style={{backgroundColor:'#004c4c'}}
-            onClick={raiseUpdate}
-            >
-            Add Update </button>
-          )
-        }
+        
         <div  >
             {
                 (updates!==undefined && updates.length>0) ?(
                 <div>
-                    
-                    <table className='text-center table table-striped table-bordered table-hover table-responsive m-2 bg-light'>
-                    <thead className='text-center'>
+                    <Accordion defaultActiveKey='1'>
+                      <AccordionItem style={{backgroundColor:'transparent'}} eventKey='1'>
+                      <AccordionHeader>
+                      <h2 className='text-dark fw-bold ms-5'>PROJECT UPDATES</h2>
+                      </AccordionHeader>
+                      <AccordionBody>
+                      {
+                      employee.role==='project-manager' && (
+                      <button className='float-end btn text-light d-block mb-3 me-4'
+                      style={{backgroundColor:'#004c4c'}}
+                      onClick={raiseUpdate}
+                      >
+                      Add Update </button>
+                      )
+                      }
+                      <table className='text-center table table-striped table-bordered table-hover table-responsive m-2 bg-light'>
+                      <thead className='text-center'>
                         <tr className='text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
                             <td> Project Id</td>
                             <td>project Status</td>
@@ -87,8 +101,8 @@ function ProjectUpdates(props) {
                             <td>Quality Status</td>
                             <td>Waiting for Client I/P</td>
                         </tr>
-                    </thead>
-                    <tbody className='text-center'>
+                      </thead>
+                      <tbody className='text-center'>
                             {
                                 updates.map((updateObj,key)=>(
                                     <tr key={key}>
@@ -157,8 +171,12 @@ function ProjectUpdates(props) {
                                 ))
                             }
                         
-                    </tbody>
-                    </table>
+                      </tbody>
+                      </table>
+                      </AccordionBody>
+                      </AccordionItem>
+                    </Accordion>
+                    
                 </div>
                 ) :(
                     <h4 className='text-danger text-center'> No Updates Available </h4>
@@ -184,7 +202,7 @@ function ProjectUpdates(props) {
               />
             </div>
             {/* Date */}
-            <div className="mb-3">
+            {/*<div className="mb-3">
               <label htmlFor="date" className="mb-1">
               Date
               </label>
@@ -193,14 +211,14 @@ function ProjectUpdates(props) {
                 className="form-control"
                 {...register("date", { required: true })}
               />
-            </div>
+            </div>*/}
             {/* project status */}
             <div className="mb-3">
               <label htmlFor="project_status" className="mb-1">
               Project Status
               </label>
-              <select className='form-control' {...register('project_status',{required:true})}>
-            <option>--select--</option>
+              <select className='form-control' {...register('project_status',{required:true})} defaultValue={'x'}>
+            <option value={'x'} disabled>--select--</option>
             <option value='sales'>Sales</option>
             <option value='pre-sales'>Pre-Sales</option>
             <option value='client sign-off'>Client Sign Off</option>

@@ -5,6 +5,10 @@ import Modal from "react-bootstrap/Modal";
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import { Accordion } from 'react-bootstrap';
+import AccordionItem from 'react-bootstrap/esm/AccordionItem';
+import AccordionHeader from 'react-bootstrap/esm/AccordionHeader';
+import AccordionBody from 'react-bootstrap/esm/AccordionBody';
 function ProjectConcerns(props) {
     //get concerns from props
     let projectId=props.projectId;
@@ -17,7 +21,8 @@ function ProjectConcerns(props) {
     let {
         register,
         setValue,
-        getValues
+        getValues,
+        reset
     } = useForm();
     
     //modal state
@@ -37,6 +42,8 @@ function ProjectConcerns(props) {
     //save concern
     const saveConcern=async()=>{
         let concernData=getValues();
+        concernData.concern_raised_on_date=new Date().toJSON().slice(0,10);
+        console.log(concernData)
         //make req
         try{
             let response=await axios.post('http://localhost:4000/manager/project-concern',concernData,{
@@ -48,7 +55,9 @@ function ProjectConcerns(props) {
                 setConcernRaised(1)
                 props.reqs();
                 setTimeout(()=>{
-                    closeModel()
+                    reset();
+                    closeModel();
+                    setConcernRaised(0);
                 },1000)
             }
         } catch(err){
@@ -58,23 +67,26 @@ function ProjectConcerns(props) {
   return (
     <div>
       <div>
-        <h2 className='text-secondary text-center'>PROJECT CONCERNS</h2>
-        {
-          employee.role==='project-manager' && (
-          <button 
-          className='float-end btn text-light d-block mb-3 me-4'
-          style={{backgroundColor:'#004c4c'}} 
-          onClick={raiseConcern}
-          >Raise Concern
-          </button>
-          )
-        }
-        
             {
                 concerns!==undefined && concerns.length>0 ?(
                     <div>
-                        
-                        <table className='text-center table table-striped table-bordered table-hover table-responsive m-2 bg-light'>
+                        <Accordion defaultActiveKey='1'>
+                          <AccordionItem style={{backgroundColor:'transparent'}} eventKey='1'>
+                            <AccordionHeader>
+                            <h2 className='fw-bold text-dark text-center ms-5'>PROJECT CONCERNS</h2>
+                            </AccordionHeader>
+                            <AccordionBody>
+                            {
+                            employee.role==='project-manager' && (
+                            <button 
+                            className='float-end btn text-light d-block mb-3 me-4'
+                            style={{backgroundColor:'#004c4c'}} 
+                            onClick={raiseConcern}
+                            >Raise Concern
+                            </button>
+                            )
+                            }
+                            <table className='text-center table table-striped table-bordered table-hover table-responsive m-2 bg-light'>
                             <thead className='text-center'>
                                 <tr className='text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
                                     <td>Project Id</td>
@@ -104,11 +116,16 @@ function ProjectConcerns(props) {
                                             }
                                             <td>{concernObj.severity_of_concern}</td>
                                             <td>{concernObj.status_of_concern}</td>
+                                            <td></td>
                                         </tr>
                                     ))
                                 }
                             </tbody>
-                        </table>
+                            </table>
+                            </AccordionBody>
+                          </AccordionItem>
+                        </Accordion>
+                        
                     </div>
                 ):(
                     <h4 className='text-danger text-center'> No Concerns Available</h4>
@@ -145,7 +162,7 @@ function ProjectConcerns(props) {
               />
             </div>
             {/* concern raised on */}
-            <div className="mb-3">
+            {/*<div className="mb-3">
               <label htmlFor="concern_raised_on_date" className="mb-1">
               Concern Raised On
               </label>
@@ -154,7 +171,7 @@ function ProjectConcerns(props) {
                 className="form-control"
                 {...register("concern_raised_on_date", { required: true })}
               />
-            </div>
+            </div>*/}
             {/* concern raised by */}
             <div className="mb-3">
               <label htmlFor="concern_raised_by" className="mb-1">
@@ -170,8 +187,8 @@ function ProjectConcerns(props) {
             {/* Severity of concern */}
             <div className="mb-4">
                 <label htmlFor="severity_of_concern">Severity</label>
-                <select name="severity_of_concern" {...register('severity_of_concern',{required:true})} id="role " className="form-control">
-                    <option defaultValue disabled>--SELECT--</option>
+                <select name="severity_of_concern" {...register('severity_of_concern',{required:true})} id="role " className="form-control" defaultValue='x'>
+                    <option value='x' disabled>--SELECT--</option>
                     <option value='high'>High</option>
                     <option value='medium'>Medium</option>
                     <option value='low'>Low</option>
@@ -180,8 +197,8 @@ function ProjectConcerns(props) {
             {/*  status */}
             <div className="mb-4">
                 <label htmlFor="status_of_concern">Status</label>
-                <select name="status_of_concern" {...register('status_of_concern',{required:true})} id="role " className="form-control" >
-                    <option selected disabled>--RAG Status--</option>
+                <select name="status_of_concern" {...register('status_of_concern',{required:true})} id="role " className="form-control"  defaultValue='raised'>
+                    <option disabled>--RAG Status--</option>
                     <option value='raised'>Raised</option>
                     <option value='remediation suggested'>Remediation Suggested</option>
                     <option value='mitigated'>Mitigated</option>
@@ -190,8 +207,8 @@ function ProjectConcerns(props) {
             {/* concern raised by cllient */}
             <div className="mb-4">
                 <label htmlFor="concern_raised_by_client">Concern Raised By Client</label>
-                <select name="concern_raised_by_client" {...register('concern_raised_by_client',{required:true})} id="role " className="form-control" >
-                    <option selected disabled>--SELECT--</option>
+                <select name="concern_raised_by_client" {...register('concern_raised_by_client',{required:true})} id="role " className="form-control" defaultValue={'x'}>
+                    <option value={'x'} disabled>--SELECT--</option>
                     <option value={1}>Yes</option>
                     <option value={0}>No</option>
                 </select>
