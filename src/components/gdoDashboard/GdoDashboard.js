@@ -102,15 +102,15 @@ function GdoDashboard() {
                 <tr className='text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
                   <td> Project Id </td>
                   <td> Project Name </td>
-                  <td> client </td>
-                  <td> client account manager </td>
-                  <td> status </td>
-                  <td> project_start_date </td>
-                  <td> project_end_date </td>
-                  <td> project_fitness_indicator </td>
-                  <td> domain </td>
-                  <td> type_of_project </td>
-                  <td> project_manager </td>
+                  <td> Client </td>
+                  <td> Client Account Manager </td>
+                  <td> Status </td>
+                  <td> Project Start Date </td>
+                  <td> Project End Date </td>
+                  <td> Project Fitness Indicator </td>
+                  <td> Domain </td>
+                  <td> Type of Project </td>
+                  <td> Project Manager </td>
                   <td>Raise Resource Request</td>
                 </tr>
               </thead>

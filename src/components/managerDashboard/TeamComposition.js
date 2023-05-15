@@ -62,7 +62,7 @@ let team=props.team;
                     </div>
 
                 ) :(
-                    <h4 className='text-center text-danger'> No Team allocated </h4>
+                    <h4 className='text-center text-dark'> No Team Allocated </h4>
                 )
             }
         </div>

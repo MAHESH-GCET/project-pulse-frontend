@@ -54,7 +54,7 @@ import './login.css';
               wordSpacing:'3px',
               lineHeight:'2rem',
               paddingBottom:'0.35rem',
-              color: '#4ea684',
+              color: '#006400',
               fontSize: "60px",
             }}>
             PROJECT PULSE
@@ -76,7 +76,7 @@ import './login.css';
               </label>
               <input
                 type="text"
-                className="form-control p-3"
+                className="form-control p-3 fs-5 fw-semibold"
                 placeholder="Enter Email"
                 {...register("email", { required: true })}
               />
@@ -91,7 +91,7 @@ import './login.css';
               </label>
               <input
                 type="password"
-                className="form-control p-3"
+                className="form-control p-3 fs-5 fw-semibold"
                 placeholder="Enter password"
                 {...register("password", { required: true })}
               />

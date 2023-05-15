@@ -194,8 +194,8 @@ function SuperAdminDashboard() {
             {/* role */}
             <div className="mb-4">
                 <label htmlFor="role">Role</label>
-                <select name="role" {...register('role',{required:true})} id="role" className="form-control" defaultValue={'x'} >
-                    <option value={'x'} disabled>--Assign-Role--</option>
+                <select name="role" {...register('role',{required:true})} id="role" className="form-control" defaultValue='x' >
+                    <option value='x'  disabled>--Assign-Role--</option>
                     <option value='admin'>Admin</option>
                     <option value='gdo'>GDO</option>
                     <option value='project-manager'>Project Manager</option>

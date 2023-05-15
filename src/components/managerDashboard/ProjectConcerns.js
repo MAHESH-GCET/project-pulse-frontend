@@ -128,7 +128,7 @@ function ProjectConcerns(props) {
                         
                     </div>
                 ):(
-                    <h4 className='text-danger text-center'> No Concerns Available</h4>
+                    <h4 className='text-dark text-center'> No Concerns Available</h4>
                 )
             }
             {/* modal */}

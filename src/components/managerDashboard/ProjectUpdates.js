@@ -179,7 +179,7 @@ function ProjectUpdates(props) {
                     
                 </div>
                 ) :(
-                    <h4 className='text-danger text-center'> No Updates Available </h4>
+                    <h4 className='text-dark text-center'> No Updates Available </h4>
                 )
             }
             {/* modal */}

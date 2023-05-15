@@ -19,7 +19,7 @@ function Navbar() {
   return (
     <div>
       <nav className='navbar bg-body-tertiary'>
-        <Link className='navbar-brand' to='#'>
+        <Link className='navbar-brand' to='/'>
           <img
           src='https://www.westagilelabs.com/wp-content/uploads/2022/10/wal_logo-1.png'
           alt='logo'
@@ -30,9 +30,9 @@ function Navbar() {
         <ul className="nav justify-content-end">
         {status==="success" && (
             <div className='d-flex'>
-            <h5 className='mt-3'>Hi, {employee.employee_name}</h5>
+            <h5 className='mt-3'>Hi, {employee.employee_name.toUpperCase()}</h5>
             <NavLink className='nav-link' onClick={()=>navigate(-1)} >
-            <button className='btn text-light' style={{backgroundColor:'#004c4c'}} >Dashboard</button>
+            <button className='btn text-light' style={{backgroundColor:'#004c4c'}} >Go To Dashboard</button>
             </NavLink>
             <li className="nav-item">
             <NavLink className="nav-link" to="/" onClick={handleLogout}>

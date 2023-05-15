@@ -48,7 +48,7 @@ function Register() {
               wordSpacing:'3px',
               lineHeight:'2rem',
               paddingBottom:'0.35rem',
-              color: '#4ea684',
+              color: '#006400',
               fontSize: "60px",
             }}>
             PROJECT PULSE
@@ -71,7 +71,7 @@ function Register() {
               </label>
               <input
                 type="text"
-                className="form-control p-3"
+                className="form-control p-3 fs-5 fw-semibold"
                 placeholder="Enter Name"
                 {...register("employee_name", { required: true })}
               />
@@ -87,7 +87,7 @@ function Register() {
                 </label>
                 <input 
                 type='number'
-                className="form-control p-3"
+                className="form-control p-3 fs-5 fw-semibold"
                 placeholder="Enter Age"
                 {...register("age",{required:true})}
                 />
@@ -100,11 +100,11 @@ function Register() {
             <div className="mb-3 fw-semibold">
                 <label className="mb-1 ms-1 fw-semibold " style={{fontSize:'20px'}}>Select Gender</label>
                 <div className="form-check">
-                    <input type='radio' {...register('gender',{required:true})} id='gender' value='male' className="form-check-input p-1"/>
+                    <input type='radio' {...register('gender',{required:true})} id='gender' value='male' className="form-check-input p-1 "/>
                     <label className="form-check-label" htmlFor="gender">Male</label>
                 </div>
                 <div className="form-check">
-                    <input type='radio' {...register('gender',{required:true})} id='gender' value='female' className="form-check-input p-1"/>
+                    <input type='radio' {...register('gender',{required:true})} id='gender' value='female' className="form-check-input p-1 "/>
                     <label className="form-check-label" htmlFor="gender">Female</label>
                 </div>
                 {/* validation error*/}
@@ -117,7 +117,7 @@ function Register() {
               </label>
               <input
                 type="email"
-                className="form-control p-3"
+                className="form-control p-3 fs-5 fw-semibold"
                 placeholder="Enter email"
                 {...register("email", { required: true })}
               />
@@ -133,7 +133,7 @@ function Register() {
               </label>
               <input
                 type="password"
-                className="form-control p-3"
+                className="form-control p-3 fs-5 fw-semibold"
                 placeholder="Enter password"
                 {...register("password", { required: true })}
               />

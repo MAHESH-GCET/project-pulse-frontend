@@ -64,7 +64,7 @@ function ForgotPassword() {
               wordSpacing:'3px',
               lineHeight:'2rem',
               paddingBottom:'0.35rem',
-              color: '#4ea684',
+              color: '#006400',
               fontSize: "60px",
             }}>
             PROJECT PULSE
@@ -86,7 +86,7 @@ function ForgotPassword() {
               </label>
               <input
                 type="text"
-                className="form-control p-3"
+                className="form-control p-3 fs-5 fw-semibold"
                 placeholder="Enter Email"
                 {...register("email", { required: true })}
               />
@@ -119,7 +119,7 @@ function ForgotPassword() {
                         </label>
                         <input
                         type="number"
-                        className="form-control p-3"
+                        className="form-control p-3 fs-5 fw-semibold"
                         placeholder="Enter otp"
                         {...register("otp", { required: true })}
                         />
@@ -135,7 +135,7 @@ function ForgotPassword() {
                         </label>
                         <input
                         type="text"
-                        className="form-control p-3"
+                        className="form-control p-3 fs-5 fw-semibold"
                         placeholder="Enter New Password"
                         {...register("password", { required: true })}
                         />
