@@ -76,7 +76,7 @@ function ProjectUpdates(props) {
                 (updates!==undefined && updates.length>0) ?(
                 <div>
                     <Accordion defaultActiveKey='1'>
-                      <AccordionItem style={{backgroundColor:'transparent'}} eventKey='1'>
+                      <AccordionItem style={{backgroundColor:'light'}} eventKey='1'>
                       <AccordionHeader>
                       <h2 className='text-dark fw-bold ms-5'>PROJECT UPDATES</h2>
                       </AccordionHeader>

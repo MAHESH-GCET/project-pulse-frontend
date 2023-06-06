@@ -22,7 +22,6 @@ function AssignTeam(props) {
         if(response.status===201){
             setTeamAssigned(1)
             reset()
-            
         }
     } catch(err){
         console.log(err)
@@ -30,9 +29,9 @@ function AssignTeam(props) {
     
 
   }
-  useEffect(()=>{
+//   useEffect(()=>{
 
-  },[])
+//   },[])
   return (
     <div className='container'>
         <div className='row justify-content-center mt-5 mx-auto'>
@@ -40,7 +39,7 @@ function AssignTeam(props) {
         <form
         onSubmit={handleSubmit(assignTeam)}
         className="text-start border p-3 text-light w-100 bg-dark"
-        style={{ borderRadius: "20px",backgroundColor:'#004c4c',width:'500px'}}
+        style={{ borderRadius: "20px",backgroundColor:'#004c4c',width:'500px', marginBottom:'50px'}}
         >
         <h2 className='text-center text-light mb-3'>Assign Team</h2>
         {/* project id */}
@@ -144,12 +143,12 @@ function AssignTeam(props) {
             </select>
         </div>
         <div className='text-center'>
-            <button className='btn btn-light'>Create</button>
+            <button className='btn btn-light'>Assign</button>
         </div>
         <div>
         {
             teamAssigned===1 && (
-                <p className='text-center text-danger'>Team Assigned</p>
+                <p className='text-center text-light fw-bold fs-5'>Team Assigned</p>
             )
         }
         </div>

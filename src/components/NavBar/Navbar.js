@@ -31,6 +31,7 @@ function Navbar() {
         {status==="success" && (
             <div className='d-flex'>
             <h5 className='mt-3'>Hi, {employee.employee_name.toUpperCase()}</h5>
+            < div className='d-flex'> 
             <NavLink className='nav-link' onClick={()=>navigate(-1)} >
             <button className='btn text-light' style={{backgroundColor:'#004c4c'}} >Go To Dashboard</button>
             </NavLink>
@@ -39,6 +40,7 @@ function Navbar() {
               <button className='btn text-light' style={{backgroundColor:'#004c4c'}}>Logout</button>
             </NavLink>
             </li>
+            </div>
             </div>
           )
         }

@@ -15,7 +15,7 @@ let team=props.team;
                 team!==undefined && team.length>0 ?(
                     <div>
                         <Accordion defaultActiveKey='0'>
-                            <AccordionItem eventKey='0' style={{backgroundColor:'transparent'}}>
+                            <AccordionItem eventKey='0' style={{backgroundColor:'light',marginBottom:'50px'}}>
                                <AccordionHeader>
                                <h2 className='text-dark  fw-bold text-center ms-5'>TEAM COMPOSITION</h2>
                                </AccordionHeader>

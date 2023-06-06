@@ -32,7 +32,7 @@ function ManagerDashboard() {
     }
   },[]);
   return (
-    <div>
+    <div className='container'>
       {
         status==='success' ? (
           <div>

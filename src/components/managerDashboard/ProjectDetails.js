@@ -97,8 +97,8 @@ function ProjectDetails(props) {
    },[projectId])
 
   return (
-    <div>
-        <div className='d-flex justify-content-around'>
+    <div className='container'>
+    <div className='d-flex justify-content-around'>
        <Card style={{width:'13rem'}}>
         <Card.Body>
             <Card.Title className='text-center'>Team Size</Card.Title>
@@ -165,7 +165,7 @@ function ProjectDetails(props) {
         <div className='row mt-5'>
         <h2 className='text-center fw-bold text-dark'>PROJECT DETAILS</h2>
         <div className='col  mx-auto'>
-        <table className='text-center table table-striped bg-light table-bordered table-hover table-responsive m-2'>
+        <table className='text-center table  bg-light table-bordered table-hover table-responsive m-2'>
               <thead className='text-center'>
                 <tr className='text-light' style={{backgroundColor:'#004c4c',fontSize:'20px'}}>
                   <td> Project Id </td>

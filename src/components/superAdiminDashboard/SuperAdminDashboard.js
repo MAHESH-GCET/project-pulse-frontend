@@ -46,7 +46,6 @@ function SuperAdminDashboard() {
   //save user
   const saveUser=async()=>{
     let modifiedUsers=getValues();
-    closeModel()
     let reqObj=modifiedUsers
     //make http req
     try{
@@ -56,7 +55,8 @@ function SuperAdminDashboard() {
       }
     })
     setModifiedUser(res.data.payload);
-   
+    getEmployees();
+    closeModel();
     } catch(err){
       console.log(err);
     }
@@ -72,7 +72,6 @@ function SuperAdminDashboard() {
         }
       })
       setEmployees(response.data.employees)
-      
     } catch(err){
       console.log(err)
     }
@@ -87,7 +86,7 @@ function SuperAdminDashboard() {
       {
       status==='success' ? (
       <div>
-      <h2 className='text-center mb-4'>Employee Details</h2>
+      <h2 className='text-center mb-4'>EMPLOYEE  DETAILS</h2>
       {
         employees.length>0 && (
           <div>
@@ -125,7 +124,7 @@ function SuperAdminDashboard() {
       {/* modal */}
       <Modal show={showModal} onHide={closeModel} backdrop={"static"} className='bg-light'>
         <Modal.Header closeButton>
-          <Modal.Title>Edit Details</Modal.Title>
+        <Modal.Title>Edit Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="text-start   p-3 " style={{ borderRadius: "20px" }}>
@@ -218,7 +217,6 @@ function SuperAdminDashboard() {
           navigate('/')
         )
       }
-      
     </div>
   )
 }

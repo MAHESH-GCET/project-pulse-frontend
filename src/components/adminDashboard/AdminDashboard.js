@@ -47,11 +47,11 @@ function AdminDashboard() {
   },[])
   
   return (
-    <div>
+    <div className='container'>
       {
-        status==='success' ? (
+        status==='success' ? (<>
           <Accordion className='mt-5' defaultActiveKey='0'>
-          <Accordion.Item style={{backgroundColor:'transparent'}} eventKey='0'>
+          <Accordion.Item style={{backgroundColor:'light', marginBottom:'50px'}} eventKey='0'>
           <Accordion.Header> <h2 className='ms-5'>Project Details</h2></Accordion.Header>
           <Accordion.Body>
           <div >
@@ -79,10 +79,7 @@ function AdminDashboard() {
                   <td> Domain </td>
                   <td> Type of Project </td>
                   <td> Project Manager </td>
-                  { /* <td>Edit</td>
-                  <td>Delete</td> */
-                  }
-                 
+                  
                 </tr>
               </thead>
               <tbody className='text-center bg-light'>
@@ -168,10 +165,9 @@ function AdminDashboard() {
                         state:{
                           projectId:project.project_id
                         }
-                      })}>{project.project_manager}</td>
-                      
-                      {/*<td><button className='btn btn-outline-warning'>Edit</button></td>
-                      <td><button className='btn btn-outline-danger'>Delete</button></td>*/}
+                      })}>{project.project_manager}
+                      </td>
+            
                     </tr>
                   ))
                 }
@@ -186,7 +182,9 @@ function AdminDashboard() {
           </div>
           </Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item style={{backgroundColor:'transparent'}} eventKey='1'>
+          </Accordion>
+          <Accordion className='mt-5' defaultActiveKey='0'>
+        <Accordion.Item style={{backgroundColor:'light', marginBottom:'50px'}} eventKey='0'>
           <Accordion.Header><h2 className='ms-5'>Resource Requests</h2></Accordion.Header>
           <Accordion.Body>
           {/* get resourcing requests */}
@@ -215,6 +213,7 @@ function AdminDashboard() {
           </Accordion.Body>
         </Accordion.Item>
           </Accordion>
+          </>
         ) : (
           navigate('/')
         )

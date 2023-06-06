@@ -84,7 +84,7 @@ function AddProject() {
             {...register("project_name",{required:true})} 
             />
             {errors.project_name?.type === "required" && (
-                <p className="text-danger">Enter Title</p>
+                <p className="text-warning">*Required </p>
             )}
           </div>
           {/* client */}
@@ -99,7 +99,7 @@ function AddProject() {
             {...register("client",{required:true})} 
             />
             {errors.client?.type === "required" && (
-                <p className="text-danger">Enter Title</p>
+                <p className="text-warning">*Required </p>
             )}
           </div>
           {/* client account manager */}
@@ -114,7 +114,7 @@ function AddProject() {
             {...register("client_account_manager",{required:true})} 
             />
             {errors.client_account_manager?.type === "required" && (
-                <p className="text-danger">Enter Title</p>
+                <p className="text-warning">*Required </p>
             )}
           </div>
           {/* status */}
@@ -122,8 +122,8 @@ function AddProject() {
             <label htmlFor='status' className="mb-1 ms-1 fw-semibold ">
               Project Status
             </label>
-            <select className='form-control p-2' {...register('status',{required:true})} defaultValue='x'>
-            <option value='x' disabled>--select--</option>
+            <select className='form-control p-2' {...register('status',{required:true})} >
+            <option value='' disabled selected>--select--</option>
             <option value='sales'>Sales</option>
             <option value='pre-sales'>Pre-Sales</option>
             <option value='client sign-off'>Client Sign Off</option>
@@ -133,7 +133,7 @@ function AddProject() {
             <option value='deferred'>Deferred</option>
             </select>
             {errors.status?.type === "required" && (
-                <p className="text-danger">Enter Title</p>
+                <p className="text-warning">*Required </p>
             )}
           </div>
           {/* project start date */}
@@ -148,7 +148,7 @@ function AddProject() {
             {...register("project_start_date",{required:true})} 
             />
             {errors.project_start_date?.type === "required" && (
-                <p className="text-danger">Enter Title</p>
+                <p className="text-warning">*Required </p>
             )}
           </div>
           {/* project fitness indicator */}
@@ -156,14 +156,14 @@ function AddProject() {
             <label htmlFor='project_fitness_indicator' className="mb-1 ms-1 fw-semibold ">
               Project Fitness
             </label>
-            <select className='form-control p-2' {...register('project_fitness_indicator',{required:true})} defaultValue={'x'}>
-            <option value={'x'} disabled>--select--</option>
+            <select className='form-control p-2' {...register('project_fitness_indicator',{required:true})} >
+            <option value='' disabled selected>--select--</option>
             <option value='red'>Red</option>
             <option value='amber'>Amber</option>
             <option value='green'>Green</option>
             </select>
             {errors.project_fitness_indicator?.type === "required" && (
-                <p className="text-danger">Enter Title</p>
+                <p className="text-warning">*Required </p>
             )}
           </div>
           {/* domain */}
@@ -178,7 +178,7 @@ function AddProject() {
             {...register("domain",{required:true})} 
             />
             {errors.domain?.type === "required" && (
-                <p className="text-danger">Enter Title</p>
+                <p className="text-warning">*Required </p>
             )}
           </div>
           {/* type */}
@@ -186,8 +186,8 @@ function AddProject() {
             <label htmlFor='type_of_project' className="mb-1 ms-1 fw-semibold ">
               Type
             </label>
-            <select className='form-control p-2' {...register('type_of_project',{required:true})} defaultValue={'x'}>
-            <option value={'x'} disabled>--select--</option>
+            <select className='form-control p-2' {...register('type_of_project',{required:true})} >
+            <option value='' selected disabled>--select--</option>
             <option value='development'>Development</option>
             <option value='devops'>DevOps</option>
             <option value='test-automation'>Test Automation</option>
@@ -198,7 +198,7 @@ function AddProject() {
             <option value='storage'>Storage</option>
             </select>
             {errors.type_of_project?.type === "required" && (
-                <p className="text-danger">Enter Title</p>
+                <p className="text-warning">*Required </p>
             )}
           </div>
           {/* gdo id */}
@@ -206,8 +206,8 @@ function AddProject() {
             <label htmlFor='gdo_head' className="mb-1 ms-1 fw-semibold ">
               GDO Head
             </label>
-            <select className='form-control p-2' {...register('gdo_head',{required:true})} defaultValue={'x'}>
-            <option value={'x'}>
+            <select className='form-control p-2' {...register('gdo_head',{required:true})} >
+            <option value='' selected disabled>
             --select--
             </option>
             {
@@ -219,7 +219,7 @@ function AddProject() {
             }
             </select>
             {errors.gdo_head?.type === "required" && (
-                <p className="text-danger">Enter Title</p>
+                <p className="text-warning">*Required </p>
             )}
           </div>
           {/* manager */}
@@ -227,8 +227,8 @@ function AddProject() {
             <label htmlFor='project_manager' className="mb-1 ms-1 fw-semibold ">
               Project Manager
             </label>
-            <select className='form-control p-2' {...register('project_manager',{required:true})} defaultValue={'x'}> 
-            <option value={'x'} disabled>
+            <select className='form-control p-2' {...register('project_manager',{required:true})} > 
+            <option value='' selected disabled>
             --select--
             </option>
             {
@@ -240,7 +240,7 @@ function AddProject() {
             }
             </select>
             {errors.project_manager?.type === "required" && (
-                <p className="text-danger">Enter Title</p>
+                <p className="text-warning">*Required </p>
             )}
           </div>
           <div className='text-center'>

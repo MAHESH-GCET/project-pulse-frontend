@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useEffect } from 'react'; 
 import { useNavigate } from 'react-router-dom';
-import AssignTeam from '../AssignTeam/AssignTeam';
+import AssignTeam from './AssignTeam';
 import { useForm } from "react-hook-form";
 import moment from 'moment';
 import { Accordion } from 'react-bootstrap';
@@ -86,11 +86,11 @@ function GdoDashboard() {
   },[])
 
   return (
-    <div>
+    <div className='container'>
       {
         status==='success' ? (
           <Accordion className='mt-5' defaultActiveKey='0'>
-        <Accordion.Item style={{backgroundColor:'transparent'}} eventKey='0'>
+        <Accordion.Item style={{backgroundColor:'light', marginBottom:'50px'}} eventKey='0'>
           <Accordion.Header><h2 className='ms-5'>Project Details</h2></Accordion.Header>
           <Accordion.Body>
           <div className='row'>

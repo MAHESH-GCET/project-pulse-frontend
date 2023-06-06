@@ -71,7 +71,7 @@ function ProjectConcerns(props) {
                 concerns!==undefined && concerns.length>0 ?(
                     <div>
                         <Accordion defaultActiveKey='1'>
-                          <AccordionItem style={{backgroundColor:'transparent'}} eventKey='1'>
+                          <AccordionItem style={{backgroundColor:'light'}} eventKey='1'>
                             <AccordionHeader>
                             <h2 className='fw-bold text-dark text-center ms-5'>PROJECT CONCERNS</h2>
                             </AccordionHeader>

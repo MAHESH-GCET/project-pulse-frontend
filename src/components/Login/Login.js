@@ -4,6 +4,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
 import { userLogin } from '../../slices/loginSlice';
 import './login.css';
+import party from 'party-js';
 
   function Login() {
     let dispatch=useDispatch();
